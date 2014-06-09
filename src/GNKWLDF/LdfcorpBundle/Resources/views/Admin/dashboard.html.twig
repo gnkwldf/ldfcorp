@@ -1,0 +1,17 @@
+{% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ 'ldfcorp.admin.dashboard.title'|trans }}{% endblock %}
+
+{% block body %}
+    <header>
+{% include "GNKWLDFLdfcorpBundle::adminBootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_admin_dashboard' } %}
+    </header>
+    <div class="container ldfcorp-content">
+        <div class="jumbotron">
+            <article>
+                <h1>{{ 'ldfcorp.admin.dashboard.title'|trans }}</h1>
+                <p>{{ 'ldfcorp.admin.dashboard.description'|trans }}</p>
+            </article>
+        </div>
+    </div>
+{% endblock %}

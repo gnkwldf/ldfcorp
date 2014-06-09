@@ -1,0 +1,80 @@
+body{
+}
+
+.container.ldfcorp-content{
+    padding-top: 70px;
+}
+
+.ldfcorp-chat {
+    vertical-align: top;
+    width: 350px;
+}
+
+.ldfcorp-leftzone {
+    display: inline-block;
+}
+
+@media screen and (min-width: 0px) and (max-width: 768px) {
+    .ldfcorp-video, .ldfcorp-video-frame{
+        width: 480px;
+    }
+    .ldfcorp-video-frame{
+        height: 270px;
+    }
+    
+    .ldfcorp-chat {
+        width: 480px;
+        height: 400px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 992px) {
+    .ldfcorp-video, .ldfcorp-video-frame{
+        width: 352px;
+    }
+    .ldfcorp-video-frame{
+        height: 198px;
+    }
+    
+    .ldfcorp-chat {
+        height: 396px;
+    }
+    
+    .ldfcorp-description{
+        height: 193px;
+    }
+}
+
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+    .ldfcorp-video, .ldfcorp-video-frame{
+        width: 576px;
+    }
+    .ldfcorp-video-frame{
+        height: 324px;
+    }
+    
+    .ldfcorp-chat {
+        height: 509px;
+    }
+    
+    .ldfcorp-description{
+        height: 180px;
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .ldfcorp-video, .ldfcorp-video-frame{
+        width: 784px;
+    }
+    .ldfcorp-video-frame{
+        height: 441px;
+    }
+    
+    .ldfcorp-chat {
+        height: 626px;
+    }
+    
+    .ldfcorp-description{
+        height: 180px;
+    }
+}
