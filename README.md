@@ -33,5 +33,9 @@ Now you can install this project based on [Symfony 2.3.x](http://symfony.com/) â
   `php app/console ldfcorp:populate`
 * Add the nginx or your favorite web server 
   [symfony 2 configuration](http://wiki.nginx.org/Symfony)
+* Create an admin user (replace _adminuser_ by login you want)
+  `php app/console fos:user:create adminuser --super-admin`
+* Clear your prod cache
+  `php app/console cache:clear --env=prod`
 
 Now you can view the project on your favorite browser
