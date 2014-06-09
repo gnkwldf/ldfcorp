@@ -5,12 +5,13 @@ ldfcorp:
     results:
         title: Résultats
     pokemonlist:
-        title: Liste des Pokémon
         number: Numéro
         name: Nom
         status : Statut
         votes: Votes
     admin:
+        pokemonlist:
+            title: Liste des Pokémon
         dashboard:
             title: Tableau de bord
             description: Bienvenue sur le tableau de bord, vous pouvez dés à présent administrer votre site.
