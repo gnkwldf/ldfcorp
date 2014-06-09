@@ -1,6 +1,3 @@
-body{
-}
-
 .container.ldfcorp-content{
     padding-top: 70px;
 }
@@ -12,6 +9,14 @@ body{
 
 .ldfcorp-leftzone {
     display: inline-block;
+}
+.ldfcorp-links ul{
+    padding: 0px;
+}
+.ldfcorp-links li{
+    display: inline-block;
+    list-style-type: none;
+    margin: 4px;
 }
 
 @media screen and (min-width: 0px) and (max-width: 768px) {
