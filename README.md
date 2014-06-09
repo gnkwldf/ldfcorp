@@ -20,15 +20,15 @@ Now you can install this project based on [Symfony 2.3.x](http://symfony.com/) â
 ### Initialize project
 
 * Get the project
-        git clone <repository-url>
+  `git clone <repository-url>`
 * Install composer at the root of your peoject
-        curl -s http://getcomposer.org/installer | php
+  `curl -s http://getcomposer.org/installer | php`
 * Use this command and answer configuration questions
-        php composer.phar install
+  `php composer.phar install`
 * Check if your php config is correct
-        php app/check.php
+  `php app/check.php`
 * Populate the database with this script
-        php app/console ldfcorp:populate
+  `php app/console ldfcorp:populate`
 * Add the nginx or your favorite web server 
   [symfony 2 configuration](http://wiki.nginx.org/Symfony)
 
