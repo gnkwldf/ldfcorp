@@ -28,7 +28,7 @@ Now you can install this project based on [Symfony 2.3.x](http://symfony.com/) â
 * Check if your php config is correct
   `php app/check.php`
 * Create the database
-  `php app/console doctrine:schema:update`
+  `php app/console doctrine:schema:update --force`
 * Populate the database with this script
   `php app/console ldfcorp:populate`
 * Add the nginx or your favorite web server 
