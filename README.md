@@ -27,6 +27,8 @@ Now you can install this project based on [Symfony 2.3.x](http://symfony.com/) â
   `php composer.phar install`
 * Check if your php config is correct
   `php app/check.php`
+* Create the database
+  `php app/console doctrine:schema:update`
 * Populate the database with this script
   `php app/console ldfcorp:populate`
 * Add the nginx or your favorite web server 
