@@ -1,0 +1,15 @@
+{% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+<header>
+{% include "GNKWLDFLdfcorpBundle::bootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_page_create' } %}
+</header>
+<div class="container ldfcorp-content">
+    <article>
+        <h1>Create</h1>
+        <p>Cette page n'est accessible qu'aux utilisateurs</p>
+    </article>
+</div>
+{% endblock %}

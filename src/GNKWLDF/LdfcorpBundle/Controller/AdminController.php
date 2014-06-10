@@ -27,20 +27,18 @@ class AdminController extends Controller
      * @Method({"GET"})
      * @Template()
      */
-     public function pokemonListAction()
-     {
+    public function pokemonListAction()
+    {
         $list = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Pokemon')->findAllOrderBy(array('number' => 'ASC'));
         return array('list' => $list);
-     }
-     
-     
+    }
     
     /**
      * @Route("/admin/pokemon/{number}/active", name="ldfcorp_admin_pokemon_active", options={"expose"=true})
      * @Method({"POST"})
      */
-     public function activePokemonAction(Request $request, $number)
-     {
+    public function activePokemonAction(Request $request, $number)
+    {
         $pokemon = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Pokemon')->findByNumber($number);
         if(null === $pokemon)
         {
@@ -64,5 +62,5 @@ class AdminController extends Controller
         }
         $this->getDoctrine()->getEntityManager()->flush();
         return new Response('OK');
-     }
+    }
 }
