@@ -9,16 +9,33 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use GNKWLDF\LdfcorpBundle\Form\PageType;
+use GNKWLDF\LdfcorpBundle\Entity\Page;
 
 class PageController extends Controller
 {
     /**
      * @Route("/page/create", name="ldfcorp_page_create")
-     * @Method({"GET"})
+     * @Method({"GET","POST"})
      * @Template()
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
-        return array();
+        $page = new Page();
+        $page->setUser($this->getUser());
+        $form = $this->createForm(new PageType(), $page);
+        
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($page);
+            $em->flush();
+            return $this->redirect($this->generateUrl('ldfcorp_page_create'));
+        }
+        
+        return array(
+            'form' => $form->createView()
+        );
     }
 }

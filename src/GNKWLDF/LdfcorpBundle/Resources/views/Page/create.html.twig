@@ -8,8 +8,23 @@
 </header>
 <div class="container ldfcorp-content">
     <article>
-        <h1>Create</h1>
-        <p>Cette page n'est accessible qu'aux utilisateurs</p>
+        <h1>Ma page</h1>
+        <form class="form" role="form" action="{{ path('ldfcorp_page_create')}}" method="post" {{ form_enctype(form) }}>
+        
+            <div class="form-group">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name, { 'attr':{'class':'form-control'} }) }}
+                {{ form_errors(form.name) }}
+            </div>
+        
+            <div class="form-group">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, { 'attr':{'class':'form-control'} }) }}
+                {{ form_errors(form.description) }}
+            </div>
+            {{ form_rest(form) }}
+            <input type="submit" class="btn btn-primary" />
+        </form>
     </article>
 </div>
 {% endblock %}
