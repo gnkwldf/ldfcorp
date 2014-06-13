@@ -40,7 +40,7 @@ class PageController extends Controller
     }
     
     /**
-     * @Route("/page/list", name="ldfcorp_page_list")
+     * @Route("/page", name="ldfcorp_page_list")
      * @Method({"GET"})
      * @Template()
      */

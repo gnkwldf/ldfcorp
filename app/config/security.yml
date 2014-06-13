@@ -29,4 +29,5 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/page/create, role: ROLE_USER }
         - { path: ^/page/edit, role: ROLE_USER }
+        - { path: ^/page, role: ROLE_USER }
 
