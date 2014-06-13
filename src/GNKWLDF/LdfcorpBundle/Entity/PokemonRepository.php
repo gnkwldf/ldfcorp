@@ -22,7 +22,8 @@ class PokemonRepository extends EntityRepository
         return ($this->createQueryBuilder('p')
             ->select('COUNT(p)')
             ->getQuery()
-            ->getSingleScalarResult()) > 0;
+            ->getSingleScalarResult()) > 0
+        ;
     }
     
     /**
@@ -50,8 +51,11 @@ class PokemonRepository extends EntityRepository
         ;
     }
     
-    
-    
+    /**
+     * Find all active Pokémon ordered by number
+     *
+     * @return array
+     */
     public function findAllActiveByNumber()
     {
         return $this->createQueryBuilder('p')
@@ -64,6 +68,11 @@ class PokemonRepository extends EntityRepository
         ;
     }
     
+    /**
+     * Find all active Pokémon ordered by number
+     *
+     * @return array
+     */
     public function findAllActiveByVote()
     {
         return $this->createQueryBuilder('p')

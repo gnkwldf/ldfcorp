@@ -17,6 +17,7 @@
             </div>
             <div class="ldfcorp-description">
                 <article>
+    {% if list %}
                     <form class="form">
                         <div class="form-group">
                             <p>
@@ -30,6 +31,9 @@
                         </div>
                         <p><input class="btn btn-primary" type="submit" value="Vote"/> <span class="ldfcorp-wait"></span></p>
                     </form>
+    {% else %}
+                    <p>{{ 'ldfcorp.home.novote'|trans }}</p>
+    {% endif %}
                 </article>
             </div>
         </div>

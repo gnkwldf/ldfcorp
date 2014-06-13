@@ -31,11 +31,24 @@ class PageController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($page);
             $em->flush();
-            return $this->redirect($this->generateUrl('ldfcorp_page_create'));
+            return $this->redirect($this->generateUrl('ldfcorp_page_list'));
         }
         
         return array(
             'form' => $form->createView()
+        );
+    }
+    
+    /**
+     * @Route("/page", name="ldfcorp_page_list")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function listAction()
+    {
+        $pages = $this->getUser()->getPages();
+        return array(
+            'pages' => $pages
         );
     }
 }

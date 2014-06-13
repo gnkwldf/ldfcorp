@@ -23,6 +23,7 @@ class User extends BaseUser
      * @var GNKWLDF\LdfcorpBundle\Entity\Page
      *
      * @ORM\OneToMany(targetEntity="Page", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"creation" = "DESC"})
      */
     protected $pages;
 

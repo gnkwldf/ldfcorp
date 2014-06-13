@@ -6,6 +6,7 @@ ldfcorp:
     logout: Déconnexion
     home:
         title: Accueil
+        novote: Aucun Pokémon à voter pour le moment
     results:
         title: Résultats
     pokemonlist:
@@ -13,6 +14,19 @@ ldfcorp:
         name: Nom
         status : Statut
         votes: Votes
+    page:
+        action:
+            add: Ajouter une page
+        form:
+            name: Nom
+            description: Description
+        create:
+            title: Nouvelle page
+            submit: Créer
+        list:
+            title: Vos pages
+            table:
+                name: Nom de la page
     admin:
         pokemonlist:
             title: Liste des Pokémon
