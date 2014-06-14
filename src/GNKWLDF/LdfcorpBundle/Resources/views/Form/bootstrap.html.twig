@@ -1,0 +1,40 @@
+{% block form_row %}
+{% spaceless %}
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block widget_attributes %}
+{% spaceless %}
+    {% set widgetCssClass = 'form-control' %}
+    id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if max_length %} maxlength="{{ max_length }}"{% endif %}{% if pattern %} pattern="{{ pattern }}"{% endif %}
+    {% for attrname, attrvalue in attr %}{% if attrname in ['placeholder', 'title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}" {% elseif attrname == 'class' %}{% set widgetCssClass = widgetCssClass ~ ' ' ~ attrvalue %}{% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %} class="{{ widgetCssClass }}"
+{% endspaceless %}
+{% endblock widget_attributes %}
+
+{% block button_attributes %}
+{% spaceless %}
+    {% set btnCssClass = 'btn btn-primary' %}
+    id="{{ id }}" name="{{ full_name }}"{% if disabled %} disabled="disabled"{% endif %}
+    {% for attrname, attrvalue in attr %}{% if attrname == 'class' %}{% set btnCssClass = btnCssClass ~ ' ' ~ attrvalue %}{% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %} class="{{ btnCssClass }}"
+{% endspaceless %}
+{% endblock button_attributes %}
+
+{% block form_start %}
+{% spaceless %}
+    {% set method = method|upper %}
+    {% if method in ["GET", "POST"] %}
+        {% set form_method = method %}
+    {% else %}
+        {% set form_method = "POST" %}
+    {% endif %}
+    <form role="form" method="{{ form_method|lower }}" action="{{ action }}"{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+    {% if form_method != method %}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {% endif %}
+{% endspaceless %}
+{% endblock form_start %}

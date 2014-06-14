@@ -23,7 +23,9 @@ class PageController extends Controller
     {
         $page = new Page();
         $page->setUser($this->getUser());
-        $form = $this->createForm(new PageType(), $page);
+        $form = $this->createForm(new PageType(), $page, array(
+            'action' => $this->generateUrl('ldfcorp_page_create')
+        ));
         
         $form->handleRequest($request);
         

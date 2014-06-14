@@ -3,28 +3,14 @@
 {% block title %}{{ parent() }} - {{ 'ldfcorp.page.create.title'|trans }}{% endblock %}
 
 {% block body %}
+{% form_theme form 'GNKWLDFLdfcorpBundle:Form:bootstrap.html.twig' %}
 <header>
 {% include "GNKWLDFLdfcorpBundle::bootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_page_create' } %}
 </header>
 <div class="container ldfcorp-content">
     <article>
         <h1>{{ 'ldfcorp.page.create.title'|trans }}</h1>
-        <form class="form" role="form" action="{{ path('ldfcorp_page_create')}}" method="post" {{ form_enctype(form) }}>
-        
-            <div class="form-group">
-                {{ form_label(form.name, 'ldfcorp.page.form.name'|trans) }}
-                {{ form_widget(form.name, { 'attr':{'class':'form-control'} }) }}
-                {{ form_errors(form.name) }}
-            </div>
-        
-            <div class="form-group">
-                {{ form_label(form.description, 'ldfcorp.page.form.description'|trans) }}
-                {{ form_widget(form.description, { 'attr':{'class':'form-control'} }) }}
-                {{ form_errors(form.description) }}
-            </div>
-            {{ form_rest(form) }}
-            <input type="submit" class="btn btn-primary" value="{{ 'ldfcorp.page.create.submit'|trans }}" />
-        </form>
+        {{ form(form, {'attr': {'class': 'form'}}) }}
     </article>
 </div>
 {% endblock %}

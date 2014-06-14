@@ -15,8 +15,15 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
+            ->add('name', null, array(
+                'label' => 'ldfcorp.page.form.name'
+            ))
+            ->add('description', null, array(
+                'label' => 'ldfcorp.page.form.description'
+            ))
+            ->add('save', 'submit', array(
+                'label' => 'ldfcorp.page.create.submit'
+            ))
         ;
     }
     
