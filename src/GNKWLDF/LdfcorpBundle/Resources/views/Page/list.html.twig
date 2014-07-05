@@ -1,6 +1,6 @@
 {% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
 
-{% block title %}{{ parent() }} - {{ 'ldfcorp.page.list.title' }}{% endblock %}
+{% block title %}{{ parent() }} - {{ 'ldfcorp.page.list.title'|trans }}{% endblock %}
 
 {% block body %}
     <header>
@@ -20,7 +20,7 @@
                 <tbody>
         {% for page in pages %}
                     <tr>
-                        <td>{{ page.name }}</td>
+                        <td><a href="{{ path('ldfcorp_page_show', { 'id' : page.id }) }}">{{ page.name }}</a></td>
                     </tr>
         {% endfor %}
                 </tbody>

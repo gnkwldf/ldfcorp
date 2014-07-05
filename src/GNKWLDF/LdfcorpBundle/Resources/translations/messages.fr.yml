@@ -19,12 +19,13 @@ ldfcorp:
             add: Ajouter une page
         form:
             name: Nom
+            video.link: Lien vidéo à intégrer
             description: Description
         create:
             title: Nouvelle page
             submit: Créer
         list:
-            title: Vos pages
+            title: Mes pages
             table:
                 name: Nom de la page
     admin:

@@ -18,6 +18,9 @@ class PageType extends AbstractType
             ->add('name', null, array(
                 'label' => 'ldfcorp.page.form.name'
             ))
+            ->add('videoLink', null, array(
+                'label' => 'ldfcorp.page.form.video.link'
+            ))
             ->add('description', null, array(
                 'label' => 'ldfcorp.page.form.description'
             ))

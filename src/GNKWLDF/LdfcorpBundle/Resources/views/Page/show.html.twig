@@ -1,0 +1,43 @@
+{% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ page.name }}{% endblock %}
+
+
+{% block body %}
+    <header>
+        {% include "GNKWLDFLdfcorpBundle::bootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_page_show' } %}
+    </header>
+    <div class="container ldfcorp-content">
+        <div class="ldfcorp-leftzone">
+            <div class="ldfcorp-video">
+{% if page.videoLink is not null %}
+                <iframe class="ldfcorp-video-frame" frameborder="0" src="{{ page.videoLink }}" allowfullscreen></iframe>
+{% endif %}
+            </div>
+            <div class="ldfcorp-description">
+            </div>
+        </div>
+        <iframe class="ldfcorp-chat" frameborder="0" src="//www.twitch.tv/ldf_/chat"></iframe>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-page">
+                <h2>{{ page.name }}</h2>
+                <p>{{ page.description }}</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-links">
+                <article>
+                    <h2>Liens</h2>
+                    <ul>
+                        <li><a href="#" class="btn btn-default">Facebook</a></li>
+                        <li><a href="#" class="btn btn-default">Twitter</a></li>
+                        <li><a href="#" class="btn btn-default">Youtube</a></li>
+                        <li><a href="#" class="btn btn-default">Don</a></li>
+                        <li><a href="#" class="btn btn-default">Tipeee</a></li>
+                        <li><a href="#" class="btn btn-default">Boutique</a></li>
+                        <li><a href="#" class="btn btn-default">Pokédex</a></li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </div>
+{% endblock %}

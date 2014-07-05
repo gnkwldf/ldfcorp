@@ -53,4 +53,18 @@ class PageController extends Controller
             'pages' => $pages
         );
     }
+    
+    /**
+     * @Route("/page/{id}", name="ldfcorp_page_show")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function showAction($id)
+    {
+        $pageRepository = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Page');
+        $page = $pageRepository->find($id);
+        return array(
+            'page' => $page
+        );
+    }
 }

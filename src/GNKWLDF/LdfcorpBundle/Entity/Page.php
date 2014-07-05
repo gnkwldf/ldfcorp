@@ -30,6 +30,13 @@ class Page
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="video_link", type="string", length=255, nullable=true)
+     */
+    private $videoLink;
 
     /**
      * @var string
@@ -123,6 +130,29 @@ class Page
         return $this->name;
     }
 
+    /**
+     * Set videoLink
+     *
+     * @param string $videoLink
+     * @return Page
+     */
+    public function setVideoLink($videoLink)
+    {
+        $this->videoLink = $videoLink;
+
+        return $this;
+    }
+
+    /**
+     * Get videoLink
+     *
+     * @return string
+     */
+    public function getVideoLink()
+    {
+        return $this->videoLink;
+    }
+    
     /**
      * Set description
      *
