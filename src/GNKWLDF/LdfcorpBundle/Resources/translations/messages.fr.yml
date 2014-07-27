@@ -20,6 +20,7 @@ ldfcorp:
             username: Pseudonyme
             email: Courrier électronique
             roles: Rôles
+            submit: Envoyer
             role:
                 admin: Administrateur
                 vip: VIP

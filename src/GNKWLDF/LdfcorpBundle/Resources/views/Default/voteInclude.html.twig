@@ -1,0 +1,30 @@
+<article>
+{% if list %}
+    <form class="form">
+        <div class="form-group">
+            <p>
+                <label class="control-label" for="select-vote">Pokémon</label>
+                <select id="select-vote" class="form-control" name="pokemon">
+                    {% for pokemon in list %}
+                    <option value="{{ pokemon.number }}">{{ pokemon.number }} - {{ ('ldfcorp.pokemon.list.' ~ pokemon.number ~ '.name')|trans }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <div class="ldfcorp-buttons-list">
+            <ul>
+                <li>
+                    <input class="btn btn-primary" type="submit" value="Vote"/> <span class="ldfcorp-wait"></span>
+                <li>
+    {% if not embeded %}
+                <li>
+                    <a class="btn btn-default" target="_blank" href="{{ path('ldfcorp_results') }}" title="{{ 'ldfcorp.pokemon.results.title'|trans }}">{{ 'ldfcorp.pokemon.results.name'|trans }}</a>
+                </li>
+    {% endif %}
+            </ul>
+        </div>
+    </form>
+{% else %}
+    <p>{{ 'ldfcorp.home.novote'|trans }}</p>
+{% endif %}
+</article>

@@ -50,7 +50,7 @@ class Page
      * @var GNKWLDF\LdfcorpBundle\Entity\PageLink
      *
      * @ORM\OneToMany(targetEntity="PageLink", mappedBy="page", cascade={"persist", "remove"})
-     * @ORM\OrderBy({"name" = "DESC"})
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $links;
 

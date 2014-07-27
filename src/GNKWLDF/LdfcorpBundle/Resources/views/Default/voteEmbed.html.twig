@@ -1,0 +1,11 @@
+{% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ 'ldfcorp.vote.title'|trans }}{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('bundles/gnkwldfldfcorp/js/pokemon.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    {{ render(controller('GNKWLDFLdfcorpBundle:Default:voteInclude', {'embeded':true})) }}
+{% endblock %}

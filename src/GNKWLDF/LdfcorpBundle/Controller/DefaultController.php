@@ -20,8 +20,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $list = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Pokemon')->findAllActiveByNumber();
-        return array('list' => $list);
+        return array();
     }
     
     /**
@@ -85,5 +84,25 @@ class DefaultController extends Controller
         $pokemon->incrementVote();
         $this->getDoctrine()->getEntityManager()->flush();
         return new Response('OK');
+    }
+    
+    /**
+     * @Route("/vote/embed", name="ldfcorp_vote_embed")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function voteEmbedAction()
+    {
+        return array();
+    }
+    
+    
+    /**
+     * @Template()
+     */
+    public function voteIncludeAction($embeded = false)
+    {
+        $list = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Pokemon')->findAllActiveByNumber();
+        return array('list' => $list, 'embeded' => $embeded);
     }
 }
