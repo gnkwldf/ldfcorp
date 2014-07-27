@@ -25,6 +25,18 @@ class DefaultController extends Controller
     }
     
     /**
+     * @Template()
+     */
+    public function bootstrapHeaderAction($pageActive = null, $max = 3)
+    {
+        $pages = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Page')->findByLastOnline($max);
+        return array(
+            'pages' => $pages,
+            'pageActive' => $pageActive
+        );
+    }
+    
+    /**
      * @Route("/results", name="ldfcorp_results")
      * @Method({"GET"})
      * @Template()

@@ -1,0 +1,14 @@
+{% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ pageTitle }}{% endblock %}
+
+{% block body %}
+{% form_theme form 'GNKWLDFLdfcorpBundle:Form:bootstrap.html.twig' %}
+    <header>
+{% include "GNKWLDFLdfcorpBundle::adminBootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_admin_userlist' } %}
+    </header>
+    <div class="container ldfcorp-content">
+        <h1>{{ pageTitle }}</h1>
+        {{ form(form, {'attr': {'class': 'form'}}) }}
+    </div>
+{% endblock %}

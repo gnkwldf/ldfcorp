@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class PageRepository extends EntityRepository
 {
+    public function findByLastOnline($max)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.online = :o')
+            ->orderBy('p.lastOnline', 'DESC')
+            ->setParameter('o' , true)
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

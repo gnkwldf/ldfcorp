@@ -87,6 +87,7 @@ class Page
     {
         $this->online = false;
         $this->creation = new DateTime('now');
+        $this->lastOnline = new DateTime('now');
         $this->links = new ArrayCollection();
     }
     
@@ -211,6 +212,7 @@ class Page
     public function setOnline($online)
     {
         $this->online = $online;
+        $this->lastOnline = new DateTime('now');
 
         return $this;
     }

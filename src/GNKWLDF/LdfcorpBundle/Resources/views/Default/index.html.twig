@@ -8,7 +8,7 @@
 
 {% block body %}
     <header>
-    {% include "GNKWLDFLdfcorpBundle::bootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_home' } %}
+    {{ render(controller('GNKWLDFLdfcorpBundle:Default:bootstrapHeader', { 'pageActive': 'ldfcorp_home' })) }}
     </header>
     <div class="container ldfcorp-content">
         <div class="ldfcorp-leftzone">

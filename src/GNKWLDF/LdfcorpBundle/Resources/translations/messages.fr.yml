@@ -14,6 +14,27 @@ ldfcorp:
         name: Nom
         status : Statut
         votes: Votes
+    user:
+        form:
+            username: Pseudonyme
+            email: Courrier électronique
+            roles: Rôles
+            role:
+                admin: Administrateur
+                vip: VIP
+                user: Utilisateur
+        profile:
+            edit:
+                title: Éditer mon profil
+    userlist:
+        id: Id
+        username: Nom
+        email: Courrier électronique
+        actions: Actions
+        action:
+            edit:
+                title: Éditer l'utilisateur %name%
+                name: Éditer
     page:
         action:
             add: Ajouter une page
@@ -21,6 +42,7 @@ ldfcorp:
             name: Nom
             video.link: Lien vidéo à intégrer
             description: Description
+            online: Mettre en ligne
             links: Liens
         link:
             form:
@@ -50,6 +72,11 @@ ldfcorp:
     admin:
         pokemonlist:
             title: Liste des Pokémon
+        userlist:
+            title: Utilisateurs
+        user:
+            edit:
+                title: Éditer l'utilisateur
         dashboard:
             title: Tableau de bord
             description: Bienvenue sur le tableau de bord, vous pouvez dés à présent administrer votre site.

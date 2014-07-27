@@ -1,5 +1,5 @@
 {% set menu = [
-    {'path' : 'ldfcorp_page_list', 'title' : 'ldfcorp.page.list.title' }
+
 ] %}
 <nav>
     <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -22,7 +22,19 @@
                     {% for page in menu %}
                     <li{%if pageActive is defined and pageActive == page.path %} class="active"{% endif %}><a href="{{ path(page.path) }}" title="{{ page.title|trans }}">{{ page.title|trans }}</a></li>
                     {% endfor %}
+                    {% for page in pages %}
+                    <li{%if pageActive is defined and pageActive == path('ldfcorp_page_show', { 'id' : page.id }) %} class="active"{% endif %}><a href="{{ path('ldfcorp_page_show', { 'id' : page.id }) }}" title="{{ page.name }}">{{ page.name }}</a></li>
+                    {% endfor %}
                 </ul>
+                <div class="navbar-form navbar-right">
+    {% if app.user %}
+                    <a class="btn btn-default" title="{{ 'ldfcorp.user.profile.edit.title'|trans }}" href="javascript:;">{{ app.user.username }}</a>
+                    <a class="btn btn-primary" href="{{ path('ldfcorp_page_list') }}" title="{{ 'ldfcorp.page.list.title'|trans }}">{{ 'ldfcorp.page.list.title'|trans }}</a>
+                    <a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">{{ 'ldfcorp.logout'|trans }}</a>
+    {% else %}
+                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary">{{ 'ldfcorp.login'|trans }}</a>
+    {% endif %}
+                </div>
             </div>
         </div>
     </div>

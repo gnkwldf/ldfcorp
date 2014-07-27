@@ -1,0 +1,35 @@
+{% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ 'ldfcorp.admin.userlist.title'|trans }}{% endblock %}
+
+{% block body %}
+    <header>
+{% include "GNKWLDFLdfcorpBundle::adminBootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_admin_userlist' } %}
+    </header>
+    <div class="container ldfcorp-content">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>{{ 'ldfcorp.userlist.id'|trans }}</th>
+                    <th>{{ 'ldfcorp.userlist.username'|trans }}</th>
+                    <th>{{ 'ldfcorp.userlist.email'|trans }}</th>
+                    <th>{{ 'ldfcorp.userlist.actions'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for user in list %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td class="ldfcorp-buttons-list">
+                        <ul>
+                            <li><a class="btn btn-primary" title="{{ 'ldfcorp.userlist.action.edit.title'|trans({'%name%' : user.username }) }}" href="{{ path('ldfcorp_admin_user_edit', { 'id' : user.id }) }}">{{ 'ldfcorp.userlist.action.edit.name'|trans }}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

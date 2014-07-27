@@ -4,7 +4,7 @@
 
 {% block body %}
 <header>
-{% include "GNKWLDFLdfcorpBundle::bootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_page_delete' } %}
+    {{ render(controller('GNKWLDFLdfcorpBundle:Default:bootstrapHeader', { 'pageActive': 'ldfcorp_page_list' })) }}
 </header>
 <div class="container ldfcorp-content">
     <article>

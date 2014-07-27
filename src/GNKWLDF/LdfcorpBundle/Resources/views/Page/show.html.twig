@@ -4,7 +4,7 @@
 
 {% block body %}
     <header>
-        {% include "GNKWLDFLdfcorpBundle::bootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_page_show' } %}
+        {{ render(controller('GNKWLDFLdfcorpBundle:Default:bootstrapHeader', { 'pageActive': path('ldfcorp_page_show', { 'id' : page.id }) })) }}
     </header>
     <div class="container ldfcorp-content">
     {% if actions %}

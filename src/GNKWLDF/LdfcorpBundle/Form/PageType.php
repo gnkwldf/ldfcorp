@@ -24,6 +24,10 @@ class PageType extends AbstractType
             ->add('description', null, array(
                 'label' => 'ldfcorp.page.form.description'
             ))
+            ->add('online', null, array(
+                'label' => 'ldfcorp.page.form.online',
+                'required'  => false
+            ))
             ->add('links', 'collection', array(
                 'type' => new PageLinkType(),
                 'allow_add' => true,
