@@ -24,6 +24,13 @@ class PageType extends AbstractType
             ->add('description', null, array(
                 'label' => 'ldfcorp.page.form.description'
             ))
+            ->add('links', 'collection', array(
+                'type' => new PageLinkType(),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => 'ldfcorp.page.form.links'
+            ))
             ->add('save', 'submit', array(
                 'label' => 'ldfcorp.page.create.submit'
             ))

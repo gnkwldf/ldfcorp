@@ -2,42 +2,50 @@
 
 {% block title %}{{ parent() }} - {{ page.name }}{% endblock %}
 
-
 {% block body %}
     <header>
         {% include "GNKWLDFLdfcorpBundle::bootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_page_show' } %}
     </header>
     <div class="container ldfcorp-content">
+    {% if actions %}
+        <div class="row ldfcorp-actions">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ldfcorp-page ldfcorp-buttons-list">
+                <ul>
+                    <li><a class="btn btn-primary" href="{{ path('ldfcorp_page_edit', { 'id' : page.id }) }}">{{ 'ldfcorp.page.show.action.edit'|trans }}</a></li>
+                    <li><a class="btn btn-danger" href="{{ path('ldfcorp_page_delete', { 'id' : page.id }) }}">{{ 'ldfcorp.page.show.action.delete'|trans }}</a></li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
         <div class="ldfcorp-leftzone">
             <div class="ldfcorp-video">
-{% if page.videoLink is not null %}
+    {% if page.videoLink is not null %}
                 <iframe class="ldfcorp-video-frame" frameborder="0" src="{{ page.videoLink }}" allowfullscreen></iframe>
-{% endif %}
+    {% endif %}
             </div>
             <div class="ldfcorp-description">
+                <h2>{{ page.name }}</h2>
+                <p>{{ page.description }}</p>
             </div>
         </div>
         <iframe class="ldfcorp-chat" frameborder="0" src="//www.twitch.tv/ldf_/chat"></iframe>
         <div class="clearfix"></div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-page">
-                <h2>{{ page.name }}</h2>
-                <p>{{ page.description }}</p>
+                <!-- TODO Add vote here -->
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-links">
+    {% if page.links is not empty %}
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-links ldfcorp-buttons-list">
                 <article>
                     <h2>Liens</h2>
                     <ul>
-                        <li><a href="#" class="btn btn-default">Facebook</a></li>
-                        <li><a href="#" class="btn btn-default">Twitter</a></li>
-                        <li><a href="#" class="btn btn-default">Youtube</a></li>
-                        <li><a href="#" class="btn btn-default">Don</a></li>
-                        <li><a href="#" class="btn btn-default">Tipeee</a></li>
-                        <li><a href="#" class="btn btn-default">Boutique</a></li>
-                        <li><a href="#" class="btn btn-default">Pokédex</a></li>
+        {% for link in page.links %}
+                        <li><a target="_blank" href="{{ link.url }}"{% if link.title is not null %} title="{{ link.title }}"{% endif %} class="btn btn-default">{{ link.name }}</a></li>
+        {% endfor %}
                     </ul>
                 </article>
             </div>
+    {% endif %}
         </div>
     </div>
 {% endblock %}

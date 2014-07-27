@@ -10,10 +10,10 @@
 .ldfcorp-leftzone {
     display: inline-block;
 }
-.ldfcorp-links ul{
+.ldfcorp-buttons-list ul{
     padding: 0px;
 }
-.ldfcorp-links li{
+.ldfcorp-buttons-list li{
     display: inline-block;
     list-style-type: none;
     margin: 4px;
@@ -34,7 +34,7 @@
 }
 
 @media screen and (min-width: 769px) and (max-width: 992px) {
-    .ldfcorp-video, .ldfcorp-video-frame{
+    .ldfcorp-video, .ldfcorp-video-frame, .ldfcorp-description{
         width: 352px;
     }
     .ldfcorp-video-frame{
@@ -51,7 +51,7 @@
 }
 
 @media screen and (min-width: 993px) and (max-width: 1200px) {
-    .ldfcorp-video, .ldfcorp-video-frame{
+    .ldfcorp-video, .ldfcorp-video-frame, .ldfcorp-description{
         width: 576px;
     }
     .ldfcorp-video-frame{
@@ -68,7 +68,7 @@
 }
 
 @media screen and (min-width: 1201px) {
-    .ldfcorp-video, .ldfcorp-video-frame{
+    .ldfcorp-video, .ldfcorp-video-frame, .ldfcorp-description{
         width: 784px;
     }
     .ldfcorp-video-frame{

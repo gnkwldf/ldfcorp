@@ -5,6 +5,7 @@ namespace GNKWLDF\LdfcorpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Page
@@ -46,9 +47,10 @@ class Page
     private $description;
 
     /**
-     * @var array
+     * @var GNKWLDF\LdfcorpBundle\Entity\PageLink
      *
-     * @ORM\Column(name="links", type="json_array", nullable=true)
+     * @ORM\OneToMany(targetEntity="PageLink", mappedBy="page", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"name" = "DESC"})
      */
     private $links;
 
@@ -85,6 +87,7 @@ class Page
     {
         $this->online = false;
         $this->creation = new DateTime('now');
+        $this->links = new ArrayCollection();
     }
     
     public function setUser($user)
@@ -256,6 +259,17 @@ class Page
         $this->links = $links;
 
         return $this;
+    }
+    
+    public function addLink($link)
+    {
+        $link->setPage($this);
+        $this->links->add($link);
+    }
+    
+    public function removeLink($link)
+    {
+        $this->links->removeElement($link);
     }
 
     /**

@@ -26,11 +26,20 @@ class User extends BaseUser
      * @ORM\OrderBy({"creation" = "DESC"})
      */
     protected $pages;
+    
+    /**
+     * @var GNKWLDF\LdfcorpBundle\Entity\UserLink
+     *
+     * @ORM\OneToMany(targetEntity="UserLink", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"name" = "DESC"})
+     */
+    protected $links;
 
     public function __construct()
     {
         parent::__construct();
         $this->pages = new ArrayCollection();
+        $this->links = new ArrayCollection();
     }
     
     public function addPage($page)
@@ -42,5 +51,16 @@ class User extends BaseUser
     public function getPages()
     {
         return $this->pages;
+    }
+    
+    public function addLink($link)
+    {
+        $link->setUser($this);
+        $this->links[] = $link;
+    }
+    
+    public function getLinks()
+    {
+        return $this->links;
     }
 }

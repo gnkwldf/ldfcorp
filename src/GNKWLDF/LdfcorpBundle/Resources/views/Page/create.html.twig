@@ -1,6 +1,10 @@
 {% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
 
-{% block title %}{{ parent() }} - {{ 'ldfcorp.page.create.title'|trans }}{% endblock %}
+{% block title %}{{ parent() }} - {{ pageTitle }}{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/gnkwldfldfcorp/js/page-form.js') }}"></script>
+{% endblock %}
 
 {% block body %}
 {% form_theme form 'GNKWLDFLdfcorpBundle:Form:bootstrap.html.twig' %}
@@ -9,7 +13,7 @@
 </header>
 <div class="container ldfcorp-content">
     <article>
-        <h1>{{ 'ldfcorp.page.create.title'|trans }}</h1>
+        <h1>{{ pageTitle }}</h1>
         {{ form(form, {'attr': {'class': 'form'}}) }}
     </article>
 </div>

@@ -1,0 +1,21 @@
+{% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ 'ldfcorp.page.delete.title'|trans }}{% endblock %}
+
+{% block body %}
+<header>
+{% include "GNKWLDFLdfcorpBundle::bootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_page_delete' } %}
+</header>
+<div class="container ldfcorp-content">
+    <article>
+        <h1>{{ 'ldfcorp.page.delete.title'|trans }}</h1>
+        <form role="form" class="form" method="post" action="{{ path('ldfcorp_page_delete', { 'id' : page.id }) }}">
+            <label>{{ 'ldfcorp.page.delete.label'|trans({'%name%': page.name}) }}</label>
+            <div class="form-group">
+                <button class="btn btn-success" name="delete">Oui</button>
+                <button class="btn btn-danger" name="cancel">Non</button>
+            </div>
+        </form>
+    </article>
+</div>
+{% endblock %}

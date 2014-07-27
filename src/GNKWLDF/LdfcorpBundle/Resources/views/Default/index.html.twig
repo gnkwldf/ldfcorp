@@ -16,7 +16,15 @@
                 <iframe class="ldfcorp-video-frame" frameborder="0" src="//www.dailymotion.com/embed/video/x1hc74y" allowfullscreen></iframe>
             </div>
             <div class="ldfcorp-description">
-                <article>
+                <h2>Page titre</h2>
+                <p>{{ 'ldfcorp.global.description'|trans }}</p>
+            </div>
+        </div>
+        <iframe class="ldfcorp-chat" frameborder="0" src="//www.twitch.tv/ldf_/chat"></iframe>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-page">
+            <article>
     {% if list %}
                     <form class="form">
                         <div class="form-group">
@@ -29,22 +37,23 @@
                                 </select>
                             </p>
                         </div>
-                        <p><input class="btn btn-primary" type="submit" value="Vote"/> <span class="ldfcorp-wait"></span></p>
+                        <div class="ldfcorp-buttons-list">
+                            <ul>
+                                <li>
+                                    <input class="btn btn-primary" type="submit" value="Vote"/> <span class="ldfcorp-wait"></span>
+                                <li>
+                                <li>
+                                    <a class="btn btn-default" target="_blank" href="{{ path('ldfcorp_results') }}" title="{{ 'ldfcorp.pokemon.results.title'|trans }}">{{ 'ldfcorp.pokemon.results.name'|trans }}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </form>
     {% else %}
                     <p>{{ 'ldfcorp.home.novote'|trans }}</p>
     {% endif %}
                 </article>
             </div>
-        </div>
-        <iframe class="ldfcorp-chat" frameborder="0" src="//www.twitch.tv/ldf_/chat"></iframe>
-        <div class="clearfix"></div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-page">
-                <h2>Page titre</h2>
-                <p>{{ 'ldfcorp.global.description'|trans }}</p>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-links">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-links ldfcorp-buttons-list">
                 <article>
                     <h2>Liens</h2>
                     <ul>

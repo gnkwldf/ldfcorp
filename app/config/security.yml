@@ -4,7 +4,9 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_VIP:         ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH, ROLE_VIP]
+        ROLE_STREAMER:    [ROLE_USER, ROLE_VIP]
 
     providers:
         fos_userbundle:
@@ -27,8 +29,9 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/page/create, role: ROLE_USER }
-        - { path: ^/page/edit, role: ROLE_USER }
+        - { path: ^/page/create, role: ROLE_VIP }
+        - { path: ^/page/edit, role: ROLE_VIP }
+        - { path: ^/page/delete, role: ROLE_VIP }
         - { path: ^/page/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/page, role: ROLE_USER }
+        - { path: ^/page, role: ROLE_VIP }
 
