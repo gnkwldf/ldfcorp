@@ -24,4 +24,14 @@ class PageRepository extends EntityRepository
             ->getResult()
         ;
     }
+
+    public function findOneByLastOnline()
+    {
+        $pages = $this->findByLastOnline(1);
+        if(count($pages) > 0)
+        {
+            return $pages[0];
+        }
+        return null;
+    }
 }

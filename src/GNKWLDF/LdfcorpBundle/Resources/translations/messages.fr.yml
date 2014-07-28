@@ -2,7 +2,9 @@ ldfcorp:
     global:
         keywords: ldfcorp, ldf, boidin, oursbleu, gnuk, dessin, dessinateur
         description:
-            "Bienvenue à toi sur ce live ! Moi, LDF, je vais tenter de faire tous les pokemons de chacune des générations ! Lui c'est Boidin, un dessinateur gamer, maître de la frite ! Il va dessiner ce que tu lui proposeras ! Oh ! Là bas ! Un ours bleu ! Soit gentil avec lui et il te jouera de la guitare et débattra avec toi sur des sujets tous plus passionnants les uns que les autres !"
+            "Bienvenue à toi sur ce live ! Moi, LDF, je vais tenter de faire tous les Pokémon de chacune des générations ! Lui c'est Boidin, un dessinateur gamer, maître de la frite ! Il va dessiner ce que tu lui proposeras ! Oh ! Là bas ! Un ours bleu ! Soit gentil avec lui et il te jouera de la guitare et débattra avec toi sur des sujets tous plus passionnants les uns que les autres !"
+        video.link: //www.dailymotion.com/embed/video/x1hc74y
+        title: LDF Dessine Pokémon ?
     logout: Déconnexion
     login: Connexion
     home:
@@ -46,6 +48,7 @@ ldfcorp:
             description: Description
             online: Mettre en ligne
             links: Liens
+        links: Liens
         link:
             form:
                 name: Nom

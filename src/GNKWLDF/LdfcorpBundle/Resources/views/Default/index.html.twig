@@ -13,11 +13,13 @@
     <div class="container ldfcorp-content">
         <div class="ldfcorp-leftzone">
             <div class="ldfcorp-video">
-                <iframe class="ldfcorp-video-frame" frameborder="0" src="//www.dailymotion.com/embed/video/x1hc74y" allowfullscreen></iframe>
+    {% if page.videoLink is not null %}
+                <iframe class="ldfcorp-video-frame" frameborder="0" src="{{ page.videoLink }}" allowfullscreen></iframe>
+    {% endif %}
             </div>
             <div class="ldfcorp-description">
-                <h2>Page titre</h2>
-                <p>{{ 'ldfcorp.global.description'|trans }}</p>
+                <h2>{{ page.name }}</h2>
+                <p>{{ page.description }}</p>
             </div>
         </div>
         <iframe class="ldfcorp-chat" frameborder="0" src="//www.twitch.tv/ldf_/chat"></iframe>
@@ -26,20 +28,18 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-page">
                 {{ render(controller('GNKWLDFLdfcorpBundle:Default:voteInclude')) }}
             </div>
+    {% if page.links is not empty %}
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-links ldfcorp-buttons-list">
                 <article>
-                    <h2>Liens</h2>
+                    <h2>{{ 'ldfcorp.page.links'|trans }}</h2>
                     <ul>
-                        <li><a href="#" class="btn btn-default">Facebook</a></li>
-                        <li><a href="#" class="btn btn-default">Twitter</a></li>
-                        <li><a href="#" class="btn btn-default">Youtube</a></li>
-                        <li><a href="#" class="btn btn-default">Don</a></li>
-                        <li><a href="#" class="btn btn-default">Tipeee</a></li>
-                        <li><a href="#" class="btn btn-default">Boutique</a></li>
-                        <li><a href="#" class="btn btn-default">Pokédex</a></li>
+        {% for link in page.links %}
+                        <li><a target="_blank" href="{{ link.url }}"{% if link.title is not null %} title="{{ link.title }}"{% endif %} class="btn btn-default">{{ link.name }}</a></li>
+        {% endfor %}
                     </ul>
                 </article>
             </div>
+    {% endif %}
         </div>
     </div>
 {% endblock %}

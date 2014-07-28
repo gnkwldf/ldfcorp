@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use GNKWLDF\LdfcorpBundle\Entity\Page;
+use GNKWLDF\LdfcorpBundle\Entity\PageLink;
 use Gnuk\IPSecurity;
 
 class DefaultController extends Controller
@@ -20,7 +22,34 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        $page = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Page')->findOneByLastOnline();
+        $t = $this->get('translator');
+        if($page === null)
+        {
+            $page = new Page();
+            $page->setName($t->trans('ldfcorp.global.title'));
+            $page->setVideoLink($t->trans('ldfcorp.global.video.link'));
+            $page->setDescription($t->trans('ldfcorp.global.description'));
+            $this->populateWithLinksDefault($page);
+        }
+        return array('page' => $page);
+    }
+    
+    public function populateWithLinksDefault($page)
+    {
+        $json = array();
+        $filename = __DIR__ . '/../Resources/data/links_default.json';
+        if(is_file($filename)){
+            $file = file_get_contents($filename);
+            $json = json_decode($file, true);
+        }
+        foreach($json AS $element)
+        {
+            $link = new PageLink();
+            $link->setName($element['name']);
+            $link->setUrl($element['url']);
+            $page->addLink($link);
+        }
     }
     
     /**

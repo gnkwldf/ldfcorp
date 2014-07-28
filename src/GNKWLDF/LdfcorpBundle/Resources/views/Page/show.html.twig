@@ -37,7 +37,7 @@
     {% if page.links is not empty %}
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-links ldfcorp-buttons-list">
                 <article>
-                    <h2>Liens</h2>
+                    <h2>{{ 'ldfcorp.home.title'|trans }}</h2>
                     <ul>
         {% for link in page.links %}
                         <li><a target="_blank" href="{{ link.url }}"{% if link.title is not null %} title="{{ link.title }}"{% endif %} class="btn btn-default">{{ link.name }}</a></li>

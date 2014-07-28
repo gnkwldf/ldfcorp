@@ -1,0 +1,26 @@
+[
+    {
+        "name" : "Facebook",
+        "url" : "http://facebook.fr/grimmworld"
+    },
+    {
+        "name" : "Twitter",
+        "url" : "http://twitter.com/ldfcorp"
+    },
+    {
+        "name" : "Youtube",
+        "url" : "http://youtube.fr/grimmworldfr"
+    },
+    {
+        "name" : "Tipeee",
+        "url" : "https://www.tipeee.com/projects/ldf-dessins-et-videos"
+    },
+    {
+        "name" : "Boutique",
+        "url" : "http://www.redbubble.com/people/ldfcorp/collections/282178-pokemon"
+    },
+    {
+        "name" : "Pokédex",
+        "url" : "http://pokedex.gnkw.org"
+    }
+]
