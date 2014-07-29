@@ -2,9 +2,13 @@
     padding-top: 70px;
 }
 
-.ldfcorp-chat {
+.ldfcorp-chat, .ldfcorp-chat-frame{
     vertical-align: top;
     width: 350px;
+}
+
+.ldfcorp-chat {
+    display: inline-block;
 }
 
 .ldfcorp-leftzone {
@@ -27,9 +31,11 @@
         height: 270px;
     }
     
-    .ldfcorp-chat {
-        width: 480px;
+    .ldfcorp-chat-frame {
         height: 400px;
+    }
+    .ldfcorp-chat, .ldfcorp-chat-frame {
+        width: 480px;
     }
 }
 
@@ -41,7 +47,7 @@
         height: 198px;
     }
     
-    .ldfcorp-chat {
+    .ldfcorp-chat-frame {
         height: 396px;
     }
     
@@ -58,7 +64,7 @@
         height: 324px;
     }
     
-    .ldfcorp-chat {
+    .ldfcorp-chat-frame {
         height: 509px;
     }
     
@@ -74,8 +80,7 @@
     .ldfcorp-video-frame{
         height: 441px;
     }
-    
-    .ldfcorp-chat {
+    .ldfcorp-chat-frame {
         height: 626px;
     }
     
