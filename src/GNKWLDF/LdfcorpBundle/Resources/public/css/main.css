@@ -6,6 +6,14 @@
     vertical-align: top;
     width: 350px;
 }
+.ldfcorp-video-detection{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #555;
+    color: #aaa;
+    font-size: 20px;
+}
 
 .ldfcorp-chat {
     display: inline-block;

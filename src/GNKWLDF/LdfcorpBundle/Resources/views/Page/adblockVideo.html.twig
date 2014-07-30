@@ -1,0 +1,8 @@
+<script src="{{ asset('bundles/gnkwldfldfcorp/js/detection.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    detection = new Detection();
+    detection.add(true, function(){
+        $(".ldfcorp-video").html('<div class="ldfcorp-video-frame ldfcorp-video-detection"></div>');
+        $(".ldfcorp-video-detection").text("{{ 'ldfcorp.adblock.video'|trans }}");
+    });
+</script>

@@ -24,7 +24,7 @@ PageForm.prototype.addLinkForm = function() {
     var prototype = this.collectionHolder.attr('data-prototype');
 
     var newForm = prototype;
-    newForm = newForm.replace(/__name__label__/g, "Lien n°" + this.length);
+    newForm = newForm.replace(/__name__label__/g, this.length);
     newForm = newForm.replace(/__name__/g, this.length);
     this.length++;
     var $newLinkForm = $(newForm);

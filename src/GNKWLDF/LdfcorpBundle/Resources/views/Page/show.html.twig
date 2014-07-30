@@ -3,6 +3,9 @@
 {% block title %}{{ parent() }} - {{ page.name }}{% endblock %}
 
 {% block javascripts %}
+{% if page.ads %}
+{{ include('GNKWLDFLdfcorpBundle:Page:adblockVideo.html.twig') }}
+{% endif %}
 <script type="text/javascript">
     $('.refresh-video-frame').click(function(e){
         refreshFrame($('.ldfcorp-video-frame'));

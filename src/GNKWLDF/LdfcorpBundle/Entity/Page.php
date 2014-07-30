@@ -74,6 +74,13 @@ class Page
      * @ORM\Column(name="creation", type="datetime", nullable=false)
      */
     private $creation;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="ads", type="boolean", nullable=false, options={"default" : false})
+     */
+    private $ads;
     
     /**
      * @var GNKWLDF\LdfcorpBundle\Entity\User
@@ -225,6 +232,29 @@ class Page
     public function getOnline()
     {
         return $this->online;
+    }
+
+    /**
+     * Set ads
+     *
+     * @param boolean $ads
+     * @return Page
+     */
+    public function setAds($ads)
+    {
+        $this->ads = $ads;
+
+        return $this;
+    }
+
+    /**
+     * Get ads
+     *
+     * @return boolean 
+     */
+    public function getAds()
+    {
+        return $this->ads;
     }
 
     /**

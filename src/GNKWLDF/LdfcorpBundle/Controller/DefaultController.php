@@ -23,33 +23,35 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $page = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Page')->findOneByLastOnline();
-        $t = $this->get('translator');
         if($page === null)
         {
-            $page = new Page();
-            $page->setName($t->trans('ldfcorp.global.title'));
-            $page->setVideoLink($t->trans('ldfcorp.global.video.link'));
-            $page->setDescription($t->trans('ldfcorp.global.description'));
-            $this->populateWithLinksDefault($page);
+            $page = $this->getSystemDefaultPage();
         }
         return array('page' => $page);
     }
     
-    public function populateWithLinksDefault($page)
-    {
+    private function getSystemDefaultPage() {
         $json = array();
-        $filename = __DIR__ . '/../Resources/data/links_default.json';
-        if(is_file($filename)){
-            $file = file_get_contents($filename);
-            $json = json_decode($file, true);
+        $t = $this->get('translator');
+        $filename = __DIR__ . '/../Resources/data/page_default.json';
+        if(!is_file($filename)){
+            throw $this->createNotFoundException('System default page not found');
         }
-        foreach($json AS $element)
+        $file = file_get_contents($filename);
+        $json = json_decode($file, true);
+        $page = new Page();
+        $page->setName($t->trans($json['name']));
+        $page->setVideoLink($t->trans($json['videoLink']));
+        $page->setDescription($t->trans($json['description']));
+        $page->setAds($json['ads']);
+        foreach($json['links'] AS $element)
         {
             $link = new PageLink();
             $link->setName($element['name']);
             $link->setUrl($element['url']);
             $page->addLink($link);
         }
+        return $page;
     }
     
     /**

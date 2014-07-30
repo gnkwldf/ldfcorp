@@ -6,6 +6,8 @@ ldfcorp:
         video.link: //www.dailymotion.com/embed/video/x1hc74y?autoplay=1
         title: LDF Dessine Pokémon ?
     logout: Déconnexion
+    adblock:
+        video: Ce contenu est financé par ses publicités, veuillez les autoriser pour y accéder, ensuite, veuillez rafraîchir la page.
     login: Connexion
     home:
         title: Accueil
@@ -48,6 +50,7 @@ ldfcorp:
             description: Description
             online: Mettre en ligne
             links: Liens
+            ads: Désactiver les bloqueurs de publicité
         links: Liens
         link:
             form:

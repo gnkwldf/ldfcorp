@@ -4,7 +4,11 @@
 
 {% block javascripts %}
 <script src="{{ asset('bundles/gnkwldfldfcorp/js/pokemon.js') }}" type="text/javascript"></script>
+{% if page.ads %}
+{{ include('GNKWLDFLdfcorpBundle:Page:adblockVideo.html.twig') }}
+{% endif %}
 <script type="text/javascript">
+
     $('.refresh-video-frame').click(function(e){
         refreshFrame($('.ldfcorp-video-frame'));
         e.preventDefault();
