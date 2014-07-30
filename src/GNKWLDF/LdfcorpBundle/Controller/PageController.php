@@ -77,12 +77,10 @@ class PageController extends Controller
     {
         $pageRepository = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Page');
         $page = $pageRepository->find($id);
-        $currentUser = $this->getUser();
-        $user = $page->getUser();
-        $actions = false;
-        if($currentUser !== null AND $currentUser->getId() == $user->getId()) {
-            $actions = true;
+        if(null == $page) {
+            throw $this->createNotFoundException();
         }
+        $actions = $this->havePageRights($this->getUser(), $page);
         return array(
             'actions' => $actions,
             'page' => $page,
@@ -105,7 +103,7 @@ class PageController extends Controller
             throw $this->createNotFoundException();
         }
         
-        if($this->getUser()->getId() !== $page->getUser()->getId())
+        if(!$this->havePageRights($this->getUser(), $page))
         {
             throw new HttpException(403);
         }
@@ -158,7 +156,7 @@ class PageController extends Controller
             throw $this->createNotFoundException();
         }
         
-        if($this->getUser()->getId() !== $page->getUser()->getId())
+        if(!$this->havePageRights($this->getUser(), $page))
         {
             throw new HttpException(403);
         }
@@ -174,6 +172,16 @@ class PageController extends Controller
         }
         return array(
             'page' => $page
+        );
+    }
+    
+    private function havePageRights($user, $page) {
+        if(null == $user) {
+            return false;
+        }
+        return (
+            $user->getId() === $page->getUser()->getId() ||
+            $this->get('security.context')->isGranted('ROLE_ADMIN')
         );
     }
 }

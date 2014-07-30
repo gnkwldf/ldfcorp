@@ -29,7 +29,9 @@
                 <div class="navbar-form navbar-right">
     {% if app.user %}
                     <a class="btn btn-default" title="{{ 'ldfcorp.user.profile.edit.title'|trans }}" href="javascript:;">{{ app.user.username }}</a>
+        {% if is_granted("ROLE_VIP") %}
                     <a class="btn btn-primary" href="{{ path('ldfcorp_page_list') }}" title="{{ 'ldfcorp.page.list.title'|trans }}">{{ 'ldfcorp.page.list.title'|trans }}</a>
+        {% endif %}
                     <a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">{{ 'ldfcorp.logout'|trans }}</a>
     {% else %}
                     <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary">{{ 'ldfcorp.login'|trans }}</a>
