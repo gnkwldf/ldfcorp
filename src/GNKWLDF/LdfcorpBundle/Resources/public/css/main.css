@@ -13,6 +13,7 @@
     background-color: #555;
     color: #aaa;
     font-size: 20px;
+    padding: 10px;
 }
 
 .ldfcorp-chat {
@@ -32,18 +33,21 @@
 }
 
 @media screen and (min-width: 0px) and (max-width: 768px) {
-    .ldfcorp-video, .ldfcorp-video-frame{
-        width: 480px;
+    .ldfcorp-video{
+        width: 100%;
     }
     .ldfcorp-video-frame{
-        height: 270px;
+        width: 320px;
+    }
+    .ldfcorp-video-frame{
+        height: 180px;
     }
     
     .ldfcorp-chat-frame {
         height: 400px;
     }
     .ldfcorp-chat, .ldfcorp-chat-frame {
-        width: 480px;
+        width: 100%;
     }
 }
 
