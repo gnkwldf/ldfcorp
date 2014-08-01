@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new GNKWLDF\LdfcorpBundle\GNKWLDFLdfcorpBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

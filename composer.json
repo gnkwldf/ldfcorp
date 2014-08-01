@@ -9,7 +9,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.3.*",
-        "doctrine/orm": "@dev",
+        "doctrine/orm": "2.4.3",
         "doctrine/doctrine-bundle": "1.2.*",
         "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.3.*",
@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "gnkw/symfony": "2.*",
         "friendsofsymfony/jsrouting-bundle": "@stable",
-        "friendsofsymfony/user-bundle": "~1.3"
+        "friendsofsymfony/user-bundle": "~1.3",
+        "jms/serializer-bundle": "@stable"
     },
     "scripts": {
         "post-install-cmd": [
