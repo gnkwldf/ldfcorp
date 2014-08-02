@@ -2,7 +2,7 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block title %}{{ parent() }} - Login{% endblock %}
+{% block title %}{{ parent() }} - {{ 'layout.login'|trans({}, 'FOSUserBundle') }}{% endblock %}
 
 {% block stylesheets %}
 <link href="{{ asset('bundles/gnkwldfldfcorp/css/login.css') }}" rel="stylesheet" />

@@ -86,6 +86,7 @@ layout:
     logout: Déconnexion
     login: Connexion
     register: Inscription
+    confirmation: Confirmation
     logged_in_as: Connecté en tant que %username%
 
 # Form field labels
