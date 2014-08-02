@@ -1,0 +1,21 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ 'layout.confirmation'|trans({}, 'FOSUserBundle') }}{% endblock %}
+
+{% block fos_user_content %}
+<header>
+    {{ render(controller('GNKWLDFLdfcorpBundle:Default:bootstrapHeader', { 'pageActive': 'ldfcorp_home' })) }}
+</header>
+<div class="container ldfcorp-content">
+    <article>
+        <div class="jumbotron">
+            <h2>{{ 'layout.confirmation'|trans({}, 'FOSUserBundle') }}</h2>
+            <p>{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p>
+        {% if app.session is not empty %}
+            {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+            {% if targetUrl is not empty %}<p><a class="btn btn-primary" href="{{ targetUrl }}">{{ 'registration.back'|trans({}, 'FOSUserBundle') }}</a></p>{% endif %}
+        {% endif %}
+        </div>
+    </article>
+</div>
+{% endblock fos_user_content %}

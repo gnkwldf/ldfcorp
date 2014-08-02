@@ -1,0 +1,15 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ 'layout.register'|trans({}, 'FOSUserBundle') }}{% endblock %}
+
+{% block stylesheets %}
+<link href="{{ asset('bundles/gnkwldfldfcorp/css/register.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block fos_user_content %}
+<div class="container">
+    <article>
+{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    </article>
+</div>
+{% endblock fos_user_content %}
