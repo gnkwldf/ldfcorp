@@ -5,6 +5,9 @@
 {% block javascripts %}
 <script src="{{ asset('bundles/gnkwldfldfcorp/js/pokemon.js') }}" type="text/javascript"></script>
 {% endblock %}
+{% block stylesheets %}
+<link href="{{ asset('bundles/gnkwldfldfcorp/css/embed.css') }}" rel="stylesheet" />
+{% endblock %}
 
 {% block body %}
     {{ render(controller('GNKWLDFLdfcorpBundle:Default:voteInclude', {'embeded':true})) }}
