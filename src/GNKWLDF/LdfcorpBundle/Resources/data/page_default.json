@@ -1,6 +1,6 @@
 {
     "name" : "ldfcorp.global.title",
-    "videoLink" : "ldfcorp.global.video.link",
+    "video_link" : "ldfcorp.global.video.link",
     "description" : "ldfcorp.global.description",
     "ads" : true,
     "links" : [

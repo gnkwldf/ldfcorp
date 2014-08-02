@@ -57,18 +57,12 @@ class DefaultController extends Controller
         }
         $file = file_get_contents($filename);
         $json = json_decode($file, true);
-        $page = new Page();
-        $page->setName($t->trans($json['name']));
-        $page->setVideoLink($t->trans($json['videoLink']));
-        $page->setDescription($t->trans($json['description']));
-        $page->setAds($json['ads']);
-        foreach($json['links'] AS $element)
-        {
-            $link = new PageLink();
-            $link->setName($element['name']);
-            $link->setUrl($element['url']);
-            $page->addLink($link);
-        }
+        
+        $serializer = $this->get('jms_serializer');
+        $page = $serializer->deserialize($file, 'GNKWLDF\LdfcorpBundle\Entity\Page', 'json');
+        $page->setName($t->trans($page->getName()));
+        $page->setVideoLink($t->trans($page->getVideoLink()));
+        $page->setDescription($t->trans($page->getDescription()));
         return $page;
     }
     
@@ -93,6 +87,30 @@ class DefaultController extends Controller
     {
         $list = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Pokemon')->findAllActiveByVote();
         return array('list' => $list);
+    }
+
+    /**
+     * @Route("/api/pokemon/results", name="ldfcorp_api_pokemon_results", options={"expose"=true})
+     * @Method({"GET"})
+     */
+    public function apiResultsAction()
+    {
+        $t = $this->get('translator');
+        $list = array();
+        $listEntities = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Pokemon')->findAllActiveByVote();
+        foreach($listEntities AS $pokemon)
+        {
+            $element = array(
+                'name' => $t->trans('ldfcorp.pokemon.list.' . $pokemon->getNumber() . '.name'),
+                'number' => $pokemon->getNumber(),
+                'vote' => $pokemon->getVote()
+            );
+            $list[] = $element;
+        }
+        
+        $serializer = $this->get('jms_serializer');
+        $json = $serializer->serialize($list, 'json');
+        return new FormattedResponse($json);
     }
     
     /**
