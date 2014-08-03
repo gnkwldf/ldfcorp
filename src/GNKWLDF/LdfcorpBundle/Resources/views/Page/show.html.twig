@@ -20,6 +20,43 @@
     function refreshFrame(selector){
         selector.attr( 'src', function ( i, val ) { return val; });
     }
+    $('.page-online .btn').click(function(){
+        var button = $(this);
+        var online = button.attr('data-online');
+        var id = button.attr('data-id');
+        if(online === '0')
+        {
+            $.ajax({
+                type: 'POST',
+                url: Routing.generate('ldfcorp_page_online', { id: id }),
+                data: {
+                    'online': true
+                },
+                success: function(m){
+                    button.addClass('btn-success');
+                    button.removeClass('btn-danger');
+                    button.attr('data-online', 1);
+                    button.text('En ligne');
+                }
+            });
+        }
+        else
+        {
+            $.ajax({
+                type: 'POST',
+                url: Routing.generate('ldfcorp_page_online', { id: id }),
+                data: {
+                    'online': false
+                },
+                success: function(m){
+                    button.addClass('btn-danger');
+                    button.removeClass('btn-success');
+                    button.attr('data-online', 0);
+                    button.text('Hors ligne');
+                }
+            });
+        }
+    });
 </script>
 {% endblock %}
 
@@ -34,6 +71,7 @@
                 <ul>
                     <li><a class="btn btn-primary" href="{{ path('ldfcorp_page_edit', { 'id' : page.id }) }}">{{ 'ldfcorp.page.show.action.edit'|trans }}</a></li>
                     <li><a class="btn btn-danger" href="{{ path('ldfcorp_page_delete', { 'id' : page.id }) }}">{{ 'ldfcorp.page.show.action.delete'|trans }}</a></li>
+                    <li class="page-online">{% if page.online %}<button type="button" class="btn btn-success" data-online="1" data-id="{{ page.id }}">En ligne</button>{% else %}<button type="button" class="btn btn-danger" data-online="0" data-id="{{ page.id }}">Hors ligne</button>{% endif %}</li>
                 </ul>
             </div>
         </div>

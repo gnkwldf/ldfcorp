@@ -184,4 +184,39 @@ class PageController extends Controller
             $this->get('security.context')->isGranted('ROLE_ADMIN')
         );
     }
+    
+    /**
+     * @Route("/page/online/{id}", name="ldfcorp_page_online", options={"expose"=true})
+     * @Method({"POST"})
+     */
+    public function onlinePageAction(Request $request, $id)
+    {
+        $page = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Page')->find($id);
+        if(null === $page)
+        {
+            throw $this->createNotFoundException('Page not found');
+        }
+        if(null === $request->get('online'))
+        {
+            throw new HttpException(400 ,'Online parameter is missing');
+            
+        }
+        if(!$this->havePageRights($this->getUser(), $page))
+        {
+            throw new HttpException(403);
+        }
+        $online = $request->get('online');
+        switch ($online) {
+            case 'true':
+                $page->setOnline(true);
+                break;
+            case 'false':
+                $page->setOnline(false);
+                break;
+            default:
+                throw new HttpException(400, 'Bad online parameter, you should use true or false');
+        }
+        $this->getDoctrine()->getEntityManager()->flush();
+        return new Response('OK');
+    }
 }
