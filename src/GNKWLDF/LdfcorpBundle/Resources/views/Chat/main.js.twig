@@ -1,0 +1,33 @@
+var socket = io.connect("{{ host|raw }}");
+socket.on('chat message', function(data){
+    var li = $('<li>');
+    li.append($('<strong>').text(data.username + " : "));
+    li.append($('<span>').text(data.message));
+    $('#messages').append(li);
+});
+
+$( "#send" ).submit(function( event ) {
+    var message = $( "input[name='message']" ).val();
+    $( "input[name='message']" ).prop('disabled', true);
+    var data = {
+        message: message
+    };
+    $.ajax({
+        type: 'POST',
+        url: Routing.generate('ldfcorp_api_chat_send'),
+        dataType: 'json',
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function(data){
+            $( "input[name='message']" ).prop('disabled', false);
+            $( "input[name='message']" ).val('');
+            $( "input[name='message']" ).focus();
+            var height = $('#messages')[0].scrollHeight;
+            $('#messages').scrollTop(height);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log("You don't have good rights to send messages");
+        }
+    });
+    event.preventDefault();
+});

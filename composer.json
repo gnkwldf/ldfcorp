@@ -22,7 +22,8 @@
         "gnkw/symfony": "2.*",
         "friendsofsymfony/jsrouting-bundle": "@stable",
         "friendsofsymfony/user-bundle": "~1.3",
-        "jms/serializer-bundle": "@stable"
+        "jms/serializer-bundle": "@stable",
+        "wisembly/elephant.io": "@stable"
     },
     "scripts": {
         "post-install-cmd": [
