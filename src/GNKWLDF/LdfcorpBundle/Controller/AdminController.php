@@ -14,6 +14,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AdminController extends Controller
 {
+    const MAX_POKEMON = 5;
+
     /**
      * @Route("/admin/dashboard", name="ldfcorp_admin_dashboard")
      * @Method({"GET"})
@@ -21,7 +23,10 @@ class AdminController extends Controller
      */
     public function dashboardAction()
     {
-        return array();
+        $pokemonList = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Pokemon')->findActiveByVote(self::MAX_POKEMON);
+        return array(
+            'pokemonList' => $pokemonList
+        );
     }
     
     /**

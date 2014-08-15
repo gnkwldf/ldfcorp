@@ -13,5 +13,30 @@
                 <p>{{ 'ldfcorp.admin.dashboard.description'|trans }}</p>
             </article>
         </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <article>
+                    <h2>{{ 'ldfcorp.admin.dashboard.pokemon.top'|trans }}</h2>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>{{ 'ldfcorp.pokemonlist.number'|trans }}</th>
+                                <th>{{ 'ldfcorp.pokemonlist.name'|trans }}</th>
+                                <th>{{ 'ldfcorp.pokemonlist.votes'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+    {% for pokemon in pokemonList %}
+                        <tr>
+                            <td>{{ pokemon.number }}</td>
+                            <td>{{ ('ldfcorp.pokemon.list.' ~ pokemon.number ~ '.name')|trans }}</td>
+                            <td>{{ pokemon.vote }}</td>
+                        </tr>
+    {% endfor %}
+                        </tbody>
+                    </table>
+                </article>
+            </div>
+        </div>
     </div>
 {% endblock %}

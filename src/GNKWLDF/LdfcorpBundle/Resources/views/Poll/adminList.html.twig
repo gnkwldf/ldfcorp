@@ -1,0 +1,36 @@
+{% extends "GNKWLDFLdfcorpBundle::standardLayout.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ 'ldfcorp.admin.poll.list.title'|trans }}{% endblock %}
+
+{% block body %}
+    <header>
+{% include "GNKWLDFLdfcorpBundle::adminBootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_admin_poll_list' } %}
+    </header>
+    <div class="container ldfcorp-content">
+        <article>
+            <h1>{{ 'ldfcorp.admin.poll.list.title'|trans }}</h1>
+            <p><a href="{{ path('ldfcorp_admin_poll_create') }}" class="btn btn-success">{{ 'ldfcorp.admin.poll.action.add'|trans }}</a></p>
+    {% if polls is not empty %}
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>{{ 'ldfcorp.admin.poll.list.table.name'|trans }}</th>
+                        <th>{{ 'ldfcorp.admin.poll.list.table.actions'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+        {% for poll in polls %}
+                    <tr>
+                        <td><a href="{{ path('ldfcorp_admin_poll_edit', { 'id' : poll.id }) }}">{{ poll.name }}</a></td>
+                        <td class="ldfcorp-buttons-list">
+                            <ul><li><a class="btn btn-primary" href="{{ path('ldfcorp_admin_poll_edit', { 'id' : poll.id }) }}">{{ 'ldfcorp.admin.poll.list.table.action.edit'|trans }}</a></li>
+                            <li><a class="btn btn-danger" href="{{ path('ldfcorp_admin_poll_delete', { 'id' : poll.id }) }}">{{ 'ldfcorp.admin.poll.list.table.action.delete'|trans }}</a></li>
+                        </td>
+                    </tr>
+        {% endfor %}
+                </tbody>
+            </table>
+    {% endif %}
+        </article>
+    </div>
+{% endblock %}

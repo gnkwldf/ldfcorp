@@ -6,8 +6,8 @@
     <script src="{{ asset('bundles/gnkwldfldfcorp/js/symfony-form.js') }}"></script>
     <script>
     jQuery(document).ready(function() {
-        pageForm = new SfForm($('#gnkwldf_ldfcorpbundle_page_links'), "Ajouter un lien", "Supprimer ce lien");
-        pageForm.init();
+        pollForm = new SfForm($('#gnkwldf_ldfcorpbundle_poll_votingEntries'), "Ajouter un champ", "Supprimer ce champ");
+        pollForm.init();
     });
     </script>
 {% endblock %}
@@ -15,7 +15,7 @@
 {% block body %}
 {% form_theme form 'GNKWLDFLdfcorpBundle:Form:bootstrap.html.twig' %}
 <header>
-    {{ render(controller('GNKWLDFLdfcorpBundle:Default:bootstrapHeader', { 'pageActive': 'ldfcorp_page_list' })) }}
+{% include "GNKWLDFLdfcorpBundle::adminBootstrapHeader.html.twig" with { 'pageActive' : 'ldfcorp_admin_poll_list' } %}
 </header>
 <div class="container ldfcorp-content">
     <article>

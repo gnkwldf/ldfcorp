@@ -84,9 +84,39 @@ ldfcorp:
             chat:
                 title: Rafraîchir le chat
                 text: Rafraîchir
+    poll:
+        form:
+            active: Activer
+            name: Nom
+            submit: Envoyer
+            voting:
+                entries: Liste des options
+    voting:
+        entry:
+            form:
+                name: Nom
+                vote: Nombre de votes
     admin:
         pokemonlist:
             title: Liste des Pokémon
+        poll:
+            action:
+                add: Ajouter un sondage
+            list:
+                title: Liste des sondages
+                table:
+                    name: Nom du sondage
+                    actions: Actions
+                    action:
+                        edit: Éditer
+                        delete: Supprimer
+            edit:
+                title: Éditer le sondage
+            create:
+                title: Ajouter un sondage
+            delete:
+                label: Voulez-vous vraiment supprimer le sondage "%name%" ?
+                title: Supprimer le sondage
         userlist:
             title: Utilisateurs
         user:
@@ -95,6 +125,8 @@ ldfcorp:
         dashboard:
             title: Tableau de bord
             description: Bienvenue sur le tableau de bord, vous pouvez dés à présent administrer votre site.
+            pokemon:
+                top: Prochains Pokémon à dessiner
     pokemon:
         results:
             title: Accéder à la page des résultats

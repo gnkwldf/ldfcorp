@@ -1,11 +1,13 @@
-var PageForm = function(){
-    this.collectionHolder = $('#gnkwldf_ldfcorpbundle_page_links');
+var SfForm = function(collection, addText, removeText){
+    this.collectionHolder = collection;
+    this.addText = addText;
     this.length = this.collectionHolder.children('.form-group').length;
-    this.$addLink = $('<p><a class="btn btn-success" href="#" class="add_link">Ajouter un lien</a></p>');
-    this.$newLinkDiv = $('<div></div>').append(this.$addLink);
+    this.$addLink = $('<p>').append($('<a class="btn btn-success">').text(this.addText));
+    this.$newLinkDiv = $('<div>').append(this.$addLink);
+    this.removeText = removeText;
 };
 
-PageForm.prototype.init = function(){
+SfForm.prototype.init = function(){
     this.collectionHolder.append(this.$newLinkDiv);
     
     var parent = this;
@@ -20,7 +22,7 @@ PageForm.prototype.init = function(){
     });
 };
 
-PageForm.prototype.addLinkForm = function() {
+SfForm.prototype.addLinkForm = function() {
     var prototype = this.collectionHolder.attr('data-prototype');
 
     var newForm = prototype;
@@ -32,8 +34,8 @@ PageForm.prototype.addLinkForm = function() {
     this.addFormDeleteLink($newLinkForm);
 };
 
-PageForm.prototype.addFormDeleteLink = function($linkFormDiv) {
-    var $removeFormA = $('<p><a class="btn btn-danger" href="#">Supprimer ce lien</a></p>');
+SfForm.prototype.addFormDeleteLink = function($linkFormDiv) {
+    var $removeFormA = $('<p>').append($('<a class="btn btn-danger" href="#">').text(this.removeText));
     $linkFormDiv.append($removeFormA);
 
     $removeFormA.on('click', function(e) {
@@ -41,8 +43,3 @@ PageForm.prototype.addFormDeleteLink = function($linkFormDiv) {
         $linkFormDiv.remove();
     });
 };
-
-jQuery(document).ready(function() {
-    pageForm = new PageForm();
-    pageForm.init();
-});

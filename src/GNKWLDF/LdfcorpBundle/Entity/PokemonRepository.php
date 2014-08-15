@@ -52,6 +52,26 @@ class PokemonRepository extends EntityRepository
     }
     
     /**
+     * Find Pokémon ordered by vote number
+     * @param integer $max
+     *
+     * @return Pokemon|null
+     */
+    public function findActiveByVote($max)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.active = :a')
+            ->addOrderBy('p.vote', 'DESC')
+            ->addOrderBy('p.number', 'ASC')
+            ->setParameter('a' , true)
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    /**
      * Find all active Pokémon ordered by number
      *
      * @return array
