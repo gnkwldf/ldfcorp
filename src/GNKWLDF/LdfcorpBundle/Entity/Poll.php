@@ -44,6 +44,7 @@ class Poll
      * @var GNKWLDF\LdfcorpBundle\Entity\VotingEntry
      *
      * @ORM\OneToMany(targetEntity="VotingEntry", mappedBy="poll", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $votingEntries;
     

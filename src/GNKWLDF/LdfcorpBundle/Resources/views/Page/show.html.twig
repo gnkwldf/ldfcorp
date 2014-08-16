@@ -3,7 +3,7 @@
 {% block title %}{{ parent() }} - {{ page.name }}{% endblock %}
 
 {% block javascripts %}
-<script src="{{ asset('bundles/gnkwldfldfcorp/js/pokemon.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/gnkwldfldfcorp/js/poll.js') }}" type="text/javascript"></script>
 {% if page.ads %}
 {{ include('GNKWLDFLdfcorpBundle:Page:adblockVideo.html.twig') }}
 {% endif %}
@@ -101,6 +101,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-page">
                 {{ render(controller('GNKWLDFLdfcorpBundle:Default:voteInclude')) }}
+                {{ render(controller('GNKWLDFLdfcorpBundle:Poll:voteInclude')) }}
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-links ldfcorp-buttons-list">
     {% if page.links is not empty %}

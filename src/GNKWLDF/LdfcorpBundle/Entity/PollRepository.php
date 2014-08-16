@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class PollRepository extends EntityRepository
 {
+    public function findLastActive()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.active = :a')
+            ->orderBy('p.updateDate', 'DESC')
+            ->setParameter('a' , true)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

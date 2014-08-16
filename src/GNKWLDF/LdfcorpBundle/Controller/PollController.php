@@ -12,9 +12,77 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use GNKWLDF\LdfcorpBundle\Form\PollType;
 use GNKWLDF\LdfcorpBundle\Entity\Poll;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gnuk\IPSecurity;
 
 class PollController extends Controller
 {
+    
+    /**
+     * @Template()
+     */
+    public function voteIncludeAction($embeded = false)
+    {
+        $poll = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Poll')->findLastActive();
+        return array('poll' => $poll);
+    }
+
+    /**
+     * @Route("/poll/vote/{id}", name="ldfcorp_poll_vote", options={"expose"=true})
+     * @Method({"POST"})
+     */
+    public function voteAction(Request $request, $id)
+    {
+        $number = $request->get('entry');
+        if(null === $number)
+        {
+            throw new HttpException(400 ,'Entry parameter is missing');
+            
+        }
+        
+        $poll = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Poll')->find($id);
+        $votingEntry = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:VotingEntry')->findFromPoll($id, $number);
+        if(null === $poll)
+        {
+            throw $this->createNotFoundException('Poll not found');
+        }
+        
+        if(null === $votingEntry)
+        {
+            throw $this->createNotFoundException('Entry not found');
+        }
+        if(!$poll->getActive())
+        {
+            throw new HttpException(400 ,'This poll is not active now');
+        }
+        
+        $ipSecurity = new IPSecurity('poll');
+
+        $timeToWait = 5;
+
+        if($ipSecurity->timeout($timeToWait))
+        {
+            $ipSecurity->update();
+        }
+        else {
+            $ipSecurity->update();
+            throw new HttpException(405 ,'Please don\'t cheat, i\'m updating your timeout');
+        }
+        $votingEntry->incrementVote();
+        $this->getDoctrine()->getEntityManager()->flush();
+        return new Response('OK');
+    }
+
+    /**
+     * @Route("/poll/results/{id}", name="ldfcorp_poll_results")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function resultsAction($id)
+    {
+        $list = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:VotingEntry')->findAllByVoteFromPoll($id);
+        return array('list' => $list);
+    }
+
     /**
      * @Route("/admin/poll/create", name="ldfcorp_admin_poll_create")
      * @Method({"GET","POST"})

@@ -136,7 +136,7 @@ class DefaultController extends Controller
             throw new HttpException(400 ,'Pokémon is not active now');
         }
         
-        $ipSecurity = new IPSecurity('test');
+        $ipSecurity = new IPSecurity('pokemon');
 
         $timeToWait = 5;
 

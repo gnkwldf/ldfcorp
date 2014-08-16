@@ -1,0 +1,26 @@
+{% if poll %}
+<article>
+    <form class="form ldfcorp-form-poll" data-id="{{ poll.id }}">
+        <div class="form-group">
+            <p>
+                <label class="control-label" for="select-vote">{{ poll.name }}</label>
+                <select id="select-vote" class="form-control" name="entry">
+                    {% for votingEntry in poll.votingEntries %}
+                    <option value="{{ votingEntry.id }}">{{ votingEntry.name }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <div class="ldfcorp-buttons-list">
+            <ul>
+                <li>
+                    <input class="btn btn-primary" type="submit" value="Vote"/> <span class="ldfcorp-wait"></span>
+                <li>
+                <li>
+                    <a class="btn btn-default" target="_blank" href="{{ path('ldfcorp_poll_results', {'id' : poll.id}) }}" title="{{ 'ldfcorp.poll.results.link.title'|trans }}">{{ 'ldfcorp.poll.results.link.name'|trans }}</a>
+                </li>
+            </ul>
+        </div>
+    </form>
+</article>
+{% endif %}

@@ -91,8 +91,15 @@ ldfcorp:
             submit: Envoyer
             voting:
                 entries: Liste des options
+        results:
+            title: Résultats
+            link:
+                title: Accéder à la page des résultats
+                name: Résultats
     voting:
         entry:
+            name: Nom
+            votes: Votes
             form:
                 name: Nom
                 vote: Nombre de votes

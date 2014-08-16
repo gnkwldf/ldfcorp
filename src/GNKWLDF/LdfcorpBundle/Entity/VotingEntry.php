@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * VotingEntry
  *
  * @ORM\Table(name="voting_entry")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="GNKWLDF\LdfcorpBundle\Entity\VotingEntryRepository")
  */
 class VotingEntry
 {
@@ -46,6 +46,17 @@ class VotingEntry
     public function __construct()
     {
         $this->vote = false;
+    }
+    
+    /**
+     * Increment vote number
+     *
+     * @return Poll
+     */
+    public function incrementVote()
+    {
+        $this->vote++;
+        return $this;
     }
 
     /**
