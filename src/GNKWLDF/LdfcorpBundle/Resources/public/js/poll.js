@@ -23,7 +23,7 @@ Vote.prototype.init = function()
                 setTimeout(function() {
                     form.find('input[type="submit"]').prop('disabled', false);
                     form.find('select[name="'+that.option+'"]').prop('disabled', false);
-                }, this.timeout * 1000);
+                }, intVal(this.timeout) * 1000);
             },
             statusCode: {
                 403 : function() {
