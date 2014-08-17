@@ -14,6 +14,10 @@ class IPSecurity
     private $informations;
     
     private $limit = null;
+    
+    const SUCCESS = "success";
+    const LIMITED = "limited";
+    const TIMEOUT = "timeout";
 
     /**
     * IPSecurity constructor
@@ -32,25 +36,25 @@ class IPSecurity
     /**
     * Check if the time is out of the interval
     * @param integer $time Timeout in second
-    * @return boolean If the time is out of the interval
+    * @return string If the time is out of the interval
     */
     public function timeout($time)
     {
         if($this->currentTime() !== null AND $this->currentTime() > time() - $time) // Check if current time is in of the timeout interval
         {
             // The current time is in of the timeout interval
-            return false;
+            return self::TIMEOUT;
         }
         if($this->limit !== null)
         {
-            if($this->getTodayNumber() !== null AND $this->getTodayNumber() > $this->limit)
+            if($this->getTodayNumber() !== null AND $this->getTodayNumber() >= $this->limit)
             {
                 // The current time is up to time limit
-                return false;
+                return self::LIMITED;
             }
         }
         // The current time is out of the timeout interval
-        return true;
+        return self::SUCCESS;
     }
     
     public function setLimit($number)

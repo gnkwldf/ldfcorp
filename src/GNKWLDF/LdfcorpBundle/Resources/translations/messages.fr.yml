@@ -42,6 +42,10 @@ ldfcorp:
                 title: Éditer l'utilisateur %name%
                 name: Éditer
     page:
+        vote:
+            subscribe: 
+                link: Inscrivez-vous
+                text: pour voter deux fois plus vite !
         action:
             add: Ajouter une page
         form:

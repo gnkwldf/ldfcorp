@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use GNKWLDF\LdfcorpBundle\Entity\Page;
 use GNKWLDF\LdfcorpBundle\Entity\PageLink;
+use GNKWLDF\LdfcorpBundle\Entity\Pokemon;
+use GNKWLDF\LdfcorpBundle\Entity\Poll;
 use Gnuk\IPSecurity;
 
 class DefaultController extends Controller
@@ -23,8 +25,21 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $pokemonTimeout = Pokemon::TIMEOUT_ANONYMOUS;
+        $pollTimeout = Poll::TIMEOUT_ANONYMOUS;
+        $user = $this->getUser();
+        if($user !== null)
+        {
+            $pokemonTimeout = Pokemon::TIMEOUT_USER;
+            $pollTimeout = Poll::TIMEOUT_USER;
+        }
         $page = $this->getIndexPage();
-        return array('page' => $page);
+        return array(
+            'page' => $page,
+            'currentUser' => $user,
+            'pokemonTimeout' => $pokemonTimeout,
+            'pollTimeout' => $pollTimeout
+        );
     }
     
     /**
@@ -137,24 +152,32 @@ class DefaultController extends Controller
         }
         
         $ipSecurity = new IPSecurity('pokemon');
-        $timeToWait = 5;
-        $ipSecurity->setLimit(10);
+        $ipSecurity->setLimit(Pokemon::LIMIT_USER);
+        $timeout = Pokemon::TIMEOUT_ANONYMOUS;
 
         $user = $this->getUser();
         if($user !== null)
         {
-            $ipSecurity->setLimit(50);
+            $timeout = Pokemon::TIMEOUT_USER;
+            $ipSecurity->setLimit(Pokemon::LIMIT_ANONYMOUS);
             $ipSecurity->setExtraInformation('username', $user->getUsername());
             $ipSecurity->setExtraInformation('email', $user->getEmail());
         }
 
-        if($ipSecurity->timeout($timeToWait))
+        $timeoutMessage = $ipSecurity->timeout($timeout);
+        $ipSecurity->update();
+        
+        if($timeoutMessage !== IPSecurity::SUCCESS)
         {
-            $ipSecurity->update();
-        }
-        else {
-            $ipSecurity->update();
-            throw new HttpException(405 ,'Please don\'t cheat, i\'m updating your timeout');
+            if($timeoutMessage === IPSecurity::TIMEOUT)
+            {
+                throw new HttpException(405 ,'Please don\'t cheat, i\'m updating your timeout');
+            }
+            if($timeoutMessage === IPSecurity::LIMITED)
+            {
+                throw new HttpException(403 ,'You can\'t vote anymore this day');
+            }
+            throw new HttpException(405 ,'IPSecurity message : '.$timeoutMessage);
         }
         $pokemon->incrementVote();
         $this->getDoctrine()->getEntityManager()->flush();
@@ -170,7 +193,6 @@ class DefaultController extends Controller
     {
         return array();
     }
-    
     
     /**
      * @Template()

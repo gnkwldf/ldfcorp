@@ -56,24 +56,32 @@ class PollController extends Controller
         }
         
         $ipSecurity = new IPSecurity('poll-'.$id);
-        $timeToWait = 5;
-        $ipSecurity->setLimit(10);
+        $ipSecurity->setLimit(Poll::LIMIT_ANONYMOUS);
+        $timeout = Poll::TIMEOUT_ANONYMOUS;
 
         $user = $this->getUser();
         if($user !== null)
         {
-            $ipSecurity->setLimit(50);
+            $timeout = Poll::TIMEOUT_USER;
+            $ipSecurity->setLimit(Poll::LIMIT_USER);
             $ipSecurity->setExtraInformation('username', $user->getUsername());
             $ipSecurity->setExtraInformation('email', $user->getEmail());
         }
 
-        if($ipSecurity->timeout($timeToWait))
+        $timeoutMessage = $ipSecurity->timeout($timeout);
+        $ipSecurity->update();
+
+        if($timeoutMessage !== IPSecurity::SUCCESS)
         {
-            $ipSecurity->update();
-        }
-        else {
-            $ipSecurity->update();
-            throw new HttpException(405 ,'Please don\'t cheat, i\'m updating your timeout');
+            if($timeoutMessage === IPSecurity::TIMEOUT)
+            {
+                throw new HttpException(405 ,'Please don\'t cheat, i\'m updating your timeout');
+            }
+            if($timeoutMessage === IPSecurity::LIMITED)
+            {
+                throw new HttpException(403 ,'You can\'t vote anymore this day');
+            }
+            throw new HttpException(405 ,'IPSecurity message : '.$timeoutMessage);
         }
         $votingEntry->incrementVote();
         $this->getDoctrine()->getEntityManager()->flush();

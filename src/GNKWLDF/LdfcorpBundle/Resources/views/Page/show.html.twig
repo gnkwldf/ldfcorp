@@ -57,6 +57,14 @@
             });
         }
     });
+    
+    $(document).ready(function(){
+        var pokemonVote = new Vote($( ".ldfcorp-form-poll-pokemon" ), 'pokemon', Routing.generate('ldfcorp_vote'), {{ pokemonTimeout }});
+        pokemonVote.init();
+        var pollId = $( ".ldfcorp-form-poll" ).attr('data-id');
+        var pollVote = new Vote($( ".ldfcorp-form-poll" ), 'entry', Routing.generate('ldfcorp_poll_vote', { id : pollId}), {{ pollTimeout }});
+        pollVote.init();
+    });
 </script>
 {% endblock %}
 
@@ -102,6 +110,9 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-page">
                 {{ render(controller('GNKWLDFLdfcorpBundle:Default:voteInclude')) }}
                 {{ render(controller('GNKWLDFLdfcorpBundle:Poll:voteInclude')) }}
+                {% if currentUser is null %}
+                    <p><a href="{{ path('fos_user_registration_register') }}">{{ 'ldfcorp.page.vote.subscribe.link'|trans }}</a> {{ 'ldfcorp.page.vote.subscribe.text'|trans }}</p>
+                {% endif %}
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ldfcorp-links ldfcorp-buttons-list">
     {% if page.links is not empty %}

@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use GNKWLDF\LdfcorpBundle\Form\PageType;
 use GNKWLDF\LdfcorpBundle\Entity\Page;
+use GNKWLDF\LdfcorpBundle\Entity\Poll;
+use GNKWLDF\LdfcorpBundle\Entity\Pokemon;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class PageController extends Controller
@@ -75,16 +77,28 @@ class PageController extends Controller
      */
     public function showAction($id)
     {
+    
+        $pokemonTimeout = Pokemon::TIMEOUT_ANONYMOUS;
+        $pollTimeout = Poll::TIMEOUT_ANONYMOUS;
+        $user = $this->getUser();
+        if($user !== null)
+        {
+            $pokemonTimeout = Pokemon::TIMEOUT_USER;
+            $pollTimeout = Poll::TIMEOUT_USER;
+        }
         $pageRepository = $this->getDoctrine()->getRepository('GNKWLDFLdfcorpBundle:Page');
         $page = $pageRepository->find($id);
         if(null == $page) {
             throw $this->createNotFoundException();
         }
-        $actions = $this->havePageRights($this->getUser(), $page);
+        $actions = $this->havePageRights($user, $page);
         return array(
             'actions' => $actions,
             'page' => $page,
-            'user' => $page->getUser()
+            'user' => $page->getUser(),
+            'currentUser' => $user,
+            'pokemonTimeout' => $pokemonTimeout,
+            'pollTimeout' => $pollTimeout
         );
     }
     

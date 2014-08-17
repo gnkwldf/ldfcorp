@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Pokemon
 {
+
+    const TIMEOUT_USER = 5;
+    const TIMEOUT_ANONYMOUS = 10;
+    const LIMIT_USER = 500;
+    const LIMIT_ANONYMOUS = 100;
+
     /**
      * @var integer
      *
