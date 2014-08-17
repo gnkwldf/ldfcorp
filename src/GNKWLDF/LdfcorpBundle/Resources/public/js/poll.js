@@ -31,6 +31,10 @@ Vote.prototype.init = function()
                     form.find('input[type="submit"]').prop('disabled', false);
                 form.find('select[name="'+that.option+'"]').prop('disabled', false);
                 }, 5000);
+            },
+            error: function() {
+                form.find('input[type="submit"]').prop('disabled', true);
+                form.find('select[name="'+that.option+'"]').prop('disabled', true);
             }
         });
         event.preventDefault();

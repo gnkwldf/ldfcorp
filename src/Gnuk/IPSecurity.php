@@ -1,5 +1,6 @@
 <?php
 namespace Gnuk;
+use DateTime;
 
 /**
  * IPSecurity class
@@ -11,6 +12,8 @@ class IPSecurity
     private $directoryName;
     
     private $informations;
+    
+    private $limit = null;
 
     /**
     * IPSecurity constructor
@@ -23,22 +26,36 @@ class IPSecurity
             mkdir($this->directoryName, 0777, true);
         }
         $this->informations = null;
+        $this->processInformations();
     }
 
     /**
-    * Check if the time is out
+    * Check if the time is out of the interval
     * @param integer $time Timeout in second
-    * @return boolean If the time is out
+    * @return boolean If the time is out of the interval
     */
     public function timeout($time)
     {
-        if($this->fileExist() AND $this->currentTime() > time() - $time) // Check if current time is in the timeout interval
+        if($this->currentTime() !== null AND $this->currentTime() > time() - $time) // Check if current time is in of the timeout interval
         {
-            // The current time is in the timeout interval
+            // The current time is in of the timeout interval
             return false;
+        }
+        if($this->limit !== null)
+        {
+            if($this->getTodayNumber() !== null AND $this->getTodayNumber() > $this->limit)
+            {
+                // The current time is up to time limit
+                return false;
+            }
         }
         // The current time is out of the timeout interval
         return true;
+    }
+    
+    public function setLimit($number)
+    {
+        $this->limit = $number;
     }
     
     /**
@@ -47,13 +64,54 @@ class IPSecurity
     */
     public function currentTime()
     {
-        if(!$this->fileExist())
+        return $this->getInformationRow('time');
+    }
+    
+    /**
+    * Get the current number
+    * @return integer
+    */
+    public function getNumber()
+    {
+        return $this->getInformationRow('number');
+    }
+    
+    /**
+    * Get today number
+    * @return integer
+    */
+    public function getTodayNumber()
+    {
+        $day = new DateTime('now');
+        return $this->getInformationRow($day->format('Ymd'));
+    }
+    
+    public function setExtraInformation($key, $value)
+    {
+        if(!isset($this->informations['extra']))
         {
-            $this->update();
-            return time();
+            $this->informations['extra'] = array();
         }
-        $this->processInformations();
-        return $this->informations['time'];
+        $this->informations['extra'][$key] = $value;
+    }
+    
+    public function getExtraInformation($key)
+    {
+        $extra = $this->getInformationRow('extra');
+        if(null === $extra OR !isset($extra[$key]))
+        {
+            return null;
+        }
+        return $extra[$key];
+    }
+    
+    private function getInformationRow($row)
+    {
+        if(!isset($this->informations[$row]))
+        {
+            return null;
+        }
+        return $this->informations[$row];
     }
     
     /**
@@ -62,7 +120,28 @@ class IPSecurity
     public function update()
     {
         $this->ipFile();
-        $this->informations = array('time' => time()); // Set current time to informations
+        $date = new DateTime('now');
+        $dateFormatted = $date->format('Ymd');
+        $this->informations['time'] = time(); // Set current time to informations
+        $this->incrementRow($dateFormatted);
+        $this->incrementRow('number');
+        $this->writeToFile();
+    }
+    
+    private function incrementRow($name)
+    {
+        if(isset($this->informations[$name]))
+        {
+            $this->informations[$name]++; 
+        }
+        else
+        {
+            $this->informations[$name] = 1;
+        }
+    }
+    
+    private function writeToFile()
+    {
         file_put_contents($this->ipFile(), json_encode($this->informations)); // Add serialized informations about time
     }
     
@@ -71,7 +150,15 @@ class IPSecurity
     */
     private function processInformations()
     {
-        if(!isset($this->informations))
+        if(!$this->fileExist())
+        {
+            $this->informations = array(
+                'time' => null,
+                'number' => 0
+            );
+            $this->writeToFile();
+        }
+        else if(!isset($this->informations))
         {
             $this->informations = $this->jsonLoad($this->ipFile()); // Receive informations from file
         }

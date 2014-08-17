@@ -137,8 +137,16 @@ class DefaultController extends Controller
         }
         
         $ipSecurity = new IPSecurity('pokemon');
-
         $timeToWait = 5;
+        $ipSecurity->setLimit(10);
+
+        $user = $this->getUser();
+        if($user !== null)
+        {
+            $ipSecurity->setLimit(50);
+            $ipSecurity->setExtraInformation('username', $user->getUsername());
+            $ipSecurity->setExtraInformation('email', $user->getEmail());
+        }
 
         if($ipSecurity->timeout($timeToWait))
         {

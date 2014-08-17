@@ -55,9 +55,17 @@ class PollController extends Controller
             throw new HttpException(400 ,'This poll is not active now');
         }
         
-        $ipSecurity = new IPSecurity('poll');
-
+        $ipSecurity = new IPSecurity('poll-'.$id);
         $timeToWait = 5;
+        $ipSecurity->setLimit(10);
+
+        $user = $this->getUser();
+        if($user !== null)
+        {
+            $ipSecurity->setLimit(50);
+            $ipSecurity->setExtraInformation('username', $user->getUsername());
+            $ipSecurity->setExtraInformation('email', $user->getEmail());
+        }
 
         if($ipSecurity->timeout($timeToWait))
         {
