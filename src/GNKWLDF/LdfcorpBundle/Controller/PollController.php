@@ -69,9 +69,12 @@ class PollController extends Controller
         }
 
         $timeoutMessage = $ipSecurity->timeout($timeout);
-        $ipSecurity->update();
-
-        if($timeoutMessage !== IPSecurity::SUCCESS)
+        
+        if($timeoutMessage === IPSecurity::SUCCESS)
+        {
+            $ipSecurity->update();
+        }
+        else
         {
             if($timeoutMessage === IPSecurity::TIMEOUT)
             {
