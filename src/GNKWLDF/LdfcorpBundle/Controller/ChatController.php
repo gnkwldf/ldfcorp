@@ -9,7 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use ElephantIO\Client as ElephantIOClient;
+use ElephantIO\Client;
+use ElephantIO\Engine\SocketIO\Version1X;
 
 class ChatController extends Controller
 {
@@ -62,6 +63,11 @@ class ChatController extends Controller
         return $response;
     }
     
+    private function getElephant() 
+    {
+        return new Client(new Version1X($this->container->getParameter('node_server')));
+    }
+    
     public function notifyAll($type, $data)
     {
         $object = array(
@@ -69,8 +75,8 @@ class ChatController extends Controller
             "type" => $type,
             "data" => $data
         );
-        $elephant = new ElephantIOClient($this->container->getParameter('node_server'), 'socket.io', 1, false, true, true);
-        $elephant->init();
+        $elephant = $this->getElephant();
+        $elephant->initialize();
         $elephant->emit('chat', $object);
         $elephant->close();
     }

@@ -14,6 +14,8 @@ use GNKWLDF\LdfcorpBundle\Entity\Page;
 use GNKWLDF\LdfcorpBundle\Entity\Poll;
 use GNKWLDF\LdfcorpBundle\Entity\Pokemon;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gnuk\Video\Validator\VideoChecker;
+use Gnkw\Symfony\HttpFoundation\FormattedResponse;
 
 class PageController extends Controller
 {
@@ -232,5 +234,52 @@ class PageController extends Controller
         }
         $this->getDoctrine()->getEntityManager()->flush();
         return new Response('OK');
+    }
+    
+    private function getChecker($url)
+    {
+        $videoChecker = VideoChecker::getInstance();
+        $videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\YoutubeChecker");
+        $videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\DailymotionChecker");
+        return $videoChecker->getChecker($url);
+    }
+    
+    /**
+     * @Route("/api/video/checker", name="ldfcorp_api_video_checker", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function apiVideoCheckerAction(Request $request)
+    {
+        $content = $request->getContent();
+        if(empty($content))
+        {
+            throw new HttpException(400, 'Bad parameters format');
+        }
+        $params = json_decode($content, true);
+        if(!isset($params['url']))
+        {
+            throw new HttpException(400, '"url" parameter is missing');
+        }
+        
+        $url = $params['url'];
+            
+        $checker = $this->getChecker($url);
+        $iframe = array(
+            "valid" => false,
+            "changing" => false,
+            "type" => null,
+            "url" => null
+        );
+        if(null !== $checker)
+        {
+            $iframeUrl = $checker->getIframe();
+            $iframe["valid"] = true;
+            $iframe["type"] = $checker->getType();
+            $iframe["url"] = $iframeUrl;
+            if($url !== $iframeUrl) {
+                $iframe["changing"] = true;
+            }
+        }
+        return new FormattedResponse($iframe);
     }
 }

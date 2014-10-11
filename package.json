@@ -1,9 +1,9 @@
 {
   "name": "ldfcorp-socket",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Socket implementation for ldfcorp",
   "dependencies": {
     "express": "^4.8.2",
-    "socket.io": "^0.8.7"
+    "socket.io": "^1.1.0"
   }
 }
