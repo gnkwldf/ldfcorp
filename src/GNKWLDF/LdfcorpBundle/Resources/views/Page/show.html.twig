@@ -87,7 +87,7 @@
         <div class="ldfcorp-leftzone">
             <div class="ldfcorp-video">
     {% if page.videoLink is not null %}
-                <iframe class="ldfcorp-video-frame" frameborder="0" src="{{ page.videoLink }}" allowfullscreen></iframe>
+                <iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" class="ldfcorp-video-frame" frameborder="0" src="{{ page.videoLink }}" allowfullscreen></iframe>
                 <p class="pull-right">
                     <a class="refresh-video-frame" title="{{ 'ldfcorp.page.refresh.video.title'|trans }}" href="#"><span class="glyphicon glyphicon-refresh"></span><span class="sr-only">{{ 'ldfcorp.page.refresh.video.text'|trans }}</span></a>
                 </p>
@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="ldfcorp-chat">
-            <iframe class="ldfcorp-chat-frame" frameborder="0" src="//www.eclypsia.com/fr/chat/ldf-dessine"></iframe>
+            <iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms" class="ldfcorp-chat-frame" frameborder="0" src="//www.eclypsia.com/fr/chat/ldf-dessine"></iframe>
             <p class="pull-right">
                 <a class="refresh-chat-frame" title="{{ 'ldfcorp.page.refresh.chat.title'|trans }}" href="#"><span class="glyphicon glyphicon-refresh"></span><span class="sr-only">{{ 'ldfcorp.page.refresh.chat.text'|trans }}</span></a>
             </p>
