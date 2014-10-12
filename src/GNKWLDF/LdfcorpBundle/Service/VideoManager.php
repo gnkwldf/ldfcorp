@@ -12,6 +12,7 @@ class VideoManager {
         $this->videoChecker = VideoChecker::getInstance();
         $this->videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\YoutubeChecker");
         $this->videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\DailymotionChecker");
+        $this->videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\TwitchChecker");
     }
 
     public function getChecker($url)
