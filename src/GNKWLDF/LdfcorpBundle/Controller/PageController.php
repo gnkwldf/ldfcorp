@@ -14,7 +14,6 @@ use GNKWLDF\LdfcorpBundle\Entity\Page;
 use GNKWLDF\LdfcorpBundle\Entity\Poll;
 use GNKWLDF\LdfcorpBundle\Entity\Pokemon;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gnuk\Video\Validator\VideoChecker;
 use Gnkw\Symfony\HttpFoundation\FormattedResponse;
 
 class PageController extends Controller
@@ -31,25 +30,12 @@ class PageController extends Controller
         $form = $this->createForm(new PageType(), $page, array(
             'action' => $this->generateUrl('ldfcorp_page_create')
         ));
-
-        $originalLinks = new ArrayCollection();
-        
-        foreach ($page->getLinks() as $link) {
-            $originalLinks->add($link);
-        }
         
         $form->handleRequest($request);
         
         if ($form->isValid()) {
         
-            $em = $this->getDoctrine()->getManager();
-            foreach ($originalLinks as $link) {
-                if ($page->getLinks()->contains($link) == false) {
-                    $em->remove($link);
-                }
-            }
-            $em->persist($page);
-            $em->flush();
+            $this->changePage($page);
             return $this->redirect($this->generateUrl('ldfcorp_page_list'));
         }
         
@@ -123,12 +109,6 @@ class PageController extends Controller
         {
             throw new HttpException(403);
         }
-
-        $originalLinks = new ArrayCollection();
-        
-        foreach ($page->getLinks() as $link) {
-            $originalLinks->add($link);
-        }
         
         $form = $this->createForm(new PageType(), $page, array(
             'action' => $this->generateUrl('ldfcorp_page_edit', array('id' => $id))
@@ -137,14 +117,7 @@ class PageController extends Controller
         $form->handleRequest($request);
         
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            foreach ($originalLinks as $link) {
-                if ($page->getLinks()->contains($link) == false) {
-                    $em->remove($link);
-                }
-            }
-            $em->persist($page);
-            $em->flush();
+            $this->changePage($page);
             return $this->redirect($this->generateUrl('ldfcorp_page_show', array('id' => $id)));
         }
         
@@ -155,6 +128,32 @@ class PageController extends Controller
                 'form' => $form->createView()
             )
         );
+    }
+    
+    private function changePage($page)
+    {
+        $originalLinks = new ArrayCollection();
+        
+        foreach ($page->getLinks() as $link) {
+            $originalLinks->add($link);
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        if(null !== $page->getVideoLink()) {
+            $checker = $this->get('gnkw_video_manager')->getChecker($page->getVideoLink());
+            if(null !== $checker) {
+                $page->setVideoLink($checker->getIframe());
+            }
+        }
+        
+        foreach ($originalLinks as $link) {
+            if ($page->getLinks()->contains($link) == false) {
+                $em->remove($link);
+            }
+        }
+        $em->persist($page);
+        $em->flush();
     }
     
     /**
@@ -236,14 +235,6 @@ class PageController extends Controller
         return new Response('OK');
     }
     
-    private function getChecker($url)
-    {
-        $videoChecker = VideoChecker::getInstance();
-        $videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\YoutubeChecker");
-        $videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\DailymotionChecker");
-        return $videoChecker->getChecker($url);
-    }
-    
     /**
      * @Route("/api/video/checker", name="ldfcorp_api_video_checker", options={"expose"=true})
      * @Method({"GET", "POST"})
@@ -263,7 +254,7 @@ class PageController extends Controller
         
         $url = $params['url'];
             
-        $checker = $this->getChecker($url);
+        $checker = $this->get('gnkw_video_manager')->getChecker($url);
         $iframe = array(
             "valid" => false,
             "changing" => false,

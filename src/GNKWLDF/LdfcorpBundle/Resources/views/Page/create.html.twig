@@ -6,8 +6,44 @@
     <script src="{{ asset('bundles/gnkwldfldfcorp/js/symfony-form.js') }}"></script>
     <script>
     jQuery(document).ready(function() {
-        pageForm = new SfForm($('#gnkwldf_ldfcorpbundle_page_links'), "Ajouter un lien", "Supprimer ce lien");
+        var pageForm = new SfForm($('#gnkwldf_ldfcorpbundle_page_links'), "Ajouter un lien", "Supprimer ce lien");
         pageForm.init();
+        
+        $(".ldfcorp-form-link-iframe").blur(function(){
+            var $that = $(this);
+            var $formGroup = $that.closest(".form-group");
+            var url = $that.val();
+            if("" !== url) {
+                var json = {
+                    url: url
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('ldfcorp_api_video_checker'),
+                    data: JSON.stringify(json),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(iframe){
+                        $formGroup.removeClass("has-error");
+                        $formGroup.removeClass("has-success");
+                        if(iframe.valid) {
+                            $that.next('.ldfcorp-form-type-iframe').remove();
+                            $formGroup.addClass("has-success");
+                            var type = $('<span class="label label-default ldfcorp-form-type-iframe">');
+                            type.text("Ce lien provient du service " + iframe.type);
+                            $that.after(type);
+                            
+                        }
+                        else {
+                            $formGroup.addClass("has-error");
+                        }
+                        if(iframe.valid && iframe.changing) {
+                            $that.val(iframe.url);
+                        }
+                    }
+                });
+            }
+        });
     });
     </script>
 {% endblock %}

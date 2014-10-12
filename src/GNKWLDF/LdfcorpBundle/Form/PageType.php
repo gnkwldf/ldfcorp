@@ -19,7 +19,10 @@ class PageType extends AbstractType
                 'label' => 'ldfcorp.page.form.name'
             ))
             ->add('videoLink', null, array(
-                'label' => 'ldfcorp.page.form.video.link'
+                'label' => 'ldfcorp.page.form.video.link',
+                'attr' => array(
+                    'class' => 'ldfcorp-form-link-iframe'
+                )
             ))
             ->add('description', null, array(
                 'label' => 'ldfcorp.page.form.description'

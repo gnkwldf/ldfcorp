@@ -5,6 +5,7 @@ namespace GNKWLDF\LdfcorpBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
+use GNKWLDF\LdfcorpBundle\Validator\Constraints as GNKWAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -36,6 +37,7 @@ class Page
      * @var string
      *
      * @ORM\Column(name="video_link", type="string", length=255, nullable=true)
+     * @GNKWAssert\IframeVideo
      */
     private $videoLink;
 
