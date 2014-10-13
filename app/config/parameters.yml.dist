@@ -15,3 +15,5 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
     node_server: http://localhost:10000
     node_client: http://localhost:8000
+    
+    ldfcorp_iframe_chat: http://www.twitch.tv/ldf_/chat

@@ -65,7 +65,7 @@ class PageController extends Controller
      */
     public function showAction($id)
     {
-    
+        $iframeChat = $this->container->getParameter('ldfcorp_iframe_chat');
         $pokemonTimeout = Pokemon::TIMEOUT_ANONYMOUS;
         $pollTimeout = Poll::TIMEOUT_ANONYMOUS;
         $user = $this->getUser();
@@ -86,7 +86,8 @@ class PageController extends Controller
             'user' => $page->getUser(),
             'currentUser' => $user,
             'pokemonTimeout' => $pokemonTimeout,
-            'pollTimeout' => $pollTimeout
+            'pollTimeout' => $pollTimeout,
+            'iframeChat' => $iframeChat
         );
     }
     

@@ -25,6 +25,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $iframeChat = $this->container->getParameter('ldfcorp_iframe_chat');
         $pokemonTimeout = Pokemon::TIMEOUT_ANONYMOUS;
         $pollTimeout = Poll::TIMEOUT_ANONYMOUS;
         $user = $this->getUser();
@@ -38,7 +39,8 @@ class DefaultController extends Controller
             'page' => $page,
             'currentUser' => $user,
             'pokemonTimeout' => $pokemonTimeout,
-            'pollTimeout' => $pollTimeout
+            'pollTimeout' => $pollTimeout,
+            'iframeChat' => $iframeChat
         );
     }
     
