@@ -4,78 +4,84 @@
 
 {% block javascripts %}
 <script src="{{ asset('bundles/gnkwldfldfcorp/js/poll.js') }}" type="text/javascript"></script>
-{# TODO : Detect page ads from page #}
-{# {% if page.ads %} #}
 {{ include('GNKWLDFLdfcorpBundle:Page:adblockVideo.html.twig') }}
-{# {% endif %} #}
 <script type="text/javascript">
-
-    $('.refresh-video-frame').click(function(e){
-        var linksArea = "";
-        var link;
-        var ul;
-        var a;
-        $.ajax({
-            type: 'GET',
-            url: Routing.generate('ldfcorp_api_home_page'),
-            success: function(page){
-                if(typeof(page.video_link) !== 'undefined') {
-                    refreshFrame($('.ldfcorp-video-frame'), page.video_link);
-                }
-                else {
-                    refreshFrame($('.ldfcorp-video-frame'));
-                }
-                $(".page-name").text(page.name);
-                
-                if(typeof(page.description) !== 'undefined') {
-                    $(".page-description").text(page.description);
-                }
-                else {
-                    $(".page-description").text("");
-                }
-                
-                if(page.links.length > 0) {
-                    linksArea= "<article>"
-                        +"<h2>{{ 'ldfcorp.page.links'|trans }}</h2>"
-                        +"<ul>"
-                        +"</ul>";
-                }
-                $(".page-links").html(linksArea);
-                ul = $(".page-links ul");
-                for(var key in page.links) {
-                    link = page.links[key];
-                    a = $('<a></a>');
-                    a.attr("target", "_blank");
-                    a.addClass("btn");
-                    a.addClass("btn-default");
-                    if(typeof(link.title) !== 'undefined') {
-                        a.attr('title', link.title);
-                    }
-                    a.attr('href', link.url);
-                    a.text(link.name);
-                    li = $('<li></li>');
-                    li.append(a);
-                    ul.append(li);
-                }
-            }
-        });
-        e.preventDefault();
-    });
-
-    $('.refresh-chat-frame').click(function(e){
-        refreshFrame($('.ldfcorp-chat-frame'));
-        e.preventDefault();
-    });
-    
-    function refreshFrame(selector, url){
-        if( typeof(url) === 'undefined' ) {
-            url = function ( i, val ) { return val; };
-        }
-        console.log(url);
-        selector.attr( 'src', url );
-    }
     
     $(document).ready(function(){
+        var  blocker = new Blocker();
+{% if page.ads %}
+        blocker.active();
+{% endif %}
+        $('.refresh-video-frame').click(function(e){
+            var linksArea = "";
+            var link;
+            var ul;
+            var a;
+            $.ajax({
+                type: 'GET',
+                url: Routing.generate('ldfcorp_api_home_page'),
+                success: function(page){
+                    if(page.ads){
+                        blocker.active();
+                    }
+                    else {
+                        blocker.remove();
+                    }
+                    if(typeof(page.video_link) !== 'undefined') {
+                        refreshFrame($('.ldfcorp-video-frame'), page.video_link);
+                    }
+                    else {
+                        refreshFrame($('.ldfcorp-video-frame'));
+                    }
+                    $(".page-name").text(page.name);
+                    
+                    if(typeof(page.description) !== 'undefined') {
+                        $(".page-description").text(page.description);
+                    }
+                    else {
+                        $(".page-description").text("");
+                    }
+                    
+                    if(page.links.length > 0) {
+                        linksArea= "<article>"
+                            +"<h2>{{ 'ldfcorp.page.links'|trans }}</h2>"
+                            +"<ul>"
+                            +"</ul>";
+                    }
+                    $(".page-links").html(linksArea);
+                    ul = $(".page-links ul");
+                    for(var key in page.links) {
+                        link = page.links[key];
+                        a = $('<a></a>');
+                        a.attr("target", "_blank");
+                        a.addClass("btn");
+                        a.addClass("btn-default");
+                        if(typeof(link.title) !== 'undefined') {
+                            a.attr('title', link.title);
+                        }
+                        a.attr('href', link.url);
+                        a.text(link.name);
+                        li = $('<li></li>');
+                        li.append(a);
+                        ul.append(li);
+                    }
+                }
+            });
+            e.preventDefault();
+        });
+
+        $('.refresh-chat-frame').click(function(e){
+            refreshFrame($('.ldfcorp-chat-frame'));
+            e.preventDefault();
+        });
+        
+        function refreshFrame(selector, url){
+            if( typeof(url) === 'undefined' ) {
+                url = function ( i, val ) { return val; };
+            }
+            selector.attr( 'src', url );
+        }
+    
         var pokemonVote = new Vote($( ".ldfcorp-form-poll-pokemon" ), 'pokemon', Routing.generate('ldfcorp_vote'), {{ pokemonTimeout }});
         pokemonVote.init();
         var pollId = $( ".ldfcorp-form-poll" ).attr('data-id');

@@ -4,61 +4,65 @@
 
 {% block javascripts %}
 <script src="{{ asset('bundles/gnkwldfldfcorp/js/poll.js') }}" type="text/javascript"></script>
-{% if page.ads %}
 {{ include('GNKWLDFLdfcorpBundle:Page:adblockVideo.html.twig') }}
-{% endif %}
 <script type="text/javascript">
-    $('.refresh-video-frame').click(function(e){
-        refreshFrame($('.ldfcorp-video-frame'));
-        e.preventDefault();
-    });
-    $('.refresh-chat-frame').click(function(e){
-        refreshFrame($('.ldfcorp-chat-frame'));
-        e.preventDefault();
-    });
-    
-    function refreshFrame(selector){
-        selector.attr( 'src', function ( i, val ) { return val; });
-    }
-    $('.page-online .btn').click(function(){
-        var button = $(this);
-        var online = button.attr('data-online');
-        var id = button.attr('data-id');
-        if(online === '0')
-        {
-            $.ajax({
-                type: 'POST',
-                url: Routing.generate('ldfcorp_page_online', { id: id }),
-                data: {
-                    'online': true
-                },
-                success: function(m){
-                    button.addClass('btn-success');
-                    button.removeClass('btn-danger');
-                    button.attr('data-online', 1);
-                    button.text('En ligne');
-                }
-            });
-        }
-        else
-        {
-            $.ajax({
-                type: 'POST',
-                url: Routing.generate('ldfcorp_page_online', { id: id }),
-                data: {
-                    'online': false
-                },
-                success: function(m){
-                    button.addClass('btn-danger');
-                    button.removeClass('btn-success');
-                    button.attr('data-online', 0);
-                    button.text('Hors ligne');
-                }
-            });
-        }
-    });
     
     $(document).ready(function(){
+
+        var  blocker = new Blocker();
+{% if page.ads %}
+        blocker.active();
+{% endif %}
+        
+        $('.refresh-video-frame').click(function(e){
+            refreshFrame($('.ldfcorp-video-frame'));
+            e.preventDefault();
+        });
+        $('.refresh-chat-frame').click(function(e){
+            refreshFrame($('.ldfcorp-chat-frame'));
+            e.preventDefault();
+        });
+        
+        function refreshFrame(selector){
+            selector.attr( 'src', function ( i, val ) { return val; });
+        }
+        $('.page-online .btn').click(function(){
+            var button = $(this);
+            var online = button.attr('data-online');
+            var id = button.attr('data-id');
+            if(online === '0')
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('ldfcorp_page_online', { id: id }),
+                    data: {
+                        'online': true
+                    },
+                    success: function(m){
+                        button.addClass('btn-success');
+                        button.removeClass('btn-danger');
+                        button.attr('data-online', 1);
+                        button.text('En ligne');
+                    }
+                });
+            }
+            else
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('ldfcorp_page_online', { id: id }),
+                    data: {
+                        'online': false
+                    },
+                    success: function(m){
+                        button.addClass('btn-danger');
+                        button.removeClass('btn-success');
+                        button.attr('data-online', 0);
+                        button.text('Hors ligne');
+                    }
+                });
+            }
+        });
         var pokemonVote = new Vote($( ".ldfcorp-form-poll-pokemon" ), 'pokemon', Routing.generate('ldfcorp_vote'), {{ pokemonTimeout }});
         pokemonVote.init();
         var pollId = $( ".ldfcorp-form-poll" ).attr('data-id');
