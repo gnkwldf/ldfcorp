@@ -22,18 +22,18 @@ class YoutubeChecker extends BaseChecker
         if(preg_match('#^(https?\:\/\/)?(www\.)?youtube\.com\/watch#', $this->getUrl()) && isset($options["v"]))
         {
             $code = $options["v"];
-            if(preg_match('#^[a-zA-Z0-9\-]+$#', $code))
+            if(preg_match('#^[a-zA-Z0-9\-\_]+$#', $code))
             {
                 $this->code = $code;
                 return true;
             }
         }
-        if(preg_match('#^((https?\:)?\/\/)?(www\.)?youtube\.com\/embed\/([a-zA-Z0-9\-]+)#', $this->getUrl(), $matches) AND !empty($matches[4]))
+        if(preg_match('#^((https?\:)?\/\/)?(www\.)?youtube\.com\/embed\/([a-zA-Z0-9\-\_]+)#', $this->getUrl(), $matches) AND !empty($matches[4]))
         {
             $this->code = $matches[4];
             return true;
         }
-        if(preg_match('#^(https?\:\/\/)?(www\.)?youtu\.be\/([a-zA-Z0-9\-]+)#', $this->getUrl(), $matches) AND !empty($matches[3]))
+        if(preg_match('#^(https?\:\/\/)?(www\.)?youtu\.be\/([a-zA-Z0-9\-\_]+)#', $this->getUrl(), $matches) AND !empty($matches[3]))
         {
             $this->code = $matches[3];
             return true;
