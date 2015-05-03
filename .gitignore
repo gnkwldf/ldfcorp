@@ -14,3 +14,4 @@
 *.kdev4
 /src/Gnuk/cache
 /node_modules/
+.idea
