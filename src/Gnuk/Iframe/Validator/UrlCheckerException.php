@@ -1,5 +1,6 @@
 <?php
-namespace Gnuk\Video\Validator;
+
+namespace Gnuk\Iframe\Validator;
 
 use Exception;
 

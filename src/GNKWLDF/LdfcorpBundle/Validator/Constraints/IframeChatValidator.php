@@ -1,19 +1,20 @@
 <?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: anthony
+ * Date: 04/05/15
+ * Time: 21:31
+ */
 
 namespace GNKWLDF\LdfcorpBundle\Validator\Constraints;
+
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * Class IframeVideoValidator
- * @package GNKWLDF\LdfcorpBundle\Validator\Constraints
- */
-class IframeVideoValidator extends ConstraintValidator
-{
-
+class IframeChatValidator extends ConstraintValidator{
     /**
-     * @var \GNKWLDF\LdfcorpBundle\Service\VideoManager
+     * @var \GNKWLDF\LdfcorpBundle\Service\ChatManager
      */
     private $manager;
 

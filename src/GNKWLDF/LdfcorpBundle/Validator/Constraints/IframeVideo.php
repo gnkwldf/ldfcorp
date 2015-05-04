@@ -13,6 +13,6 @@ class IframeVideo extends Constraint
     
     public function validatedBy()
     {
-        return 'gnkw_iframe_validator';
+        return 'gnkw_iframe_video_validator';
     }
 }

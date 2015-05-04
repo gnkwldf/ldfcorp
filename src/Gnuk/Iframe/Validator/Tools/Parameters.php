@@ -1,5 +1,6 @@
 <?php
-namespace Gnuk\Video\Validator\Tools;
+
+namespace Gnuk\Iframe\Validator\Tools;
 
 use Countable;
 use IteratorAggregate;

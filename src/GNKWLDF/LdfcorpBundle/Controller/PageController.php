@@ -79,6 +79,10 @@ class PageController extends Controller
         if(null == $page) {
             throw $this->createNotFoundException();
         }
+        $pageChatLink = $page->getChatLink();
+        if(!empty($pageChatLink)) {
+            $iframeChat = $pageChatLink;
+        }
         $actions = $this->havePageRights($user, $page);
         return array(
             'actions' => $actions,
@@ -232,7 +236,7 @@ class PageController extends Controller
             default:
                 throw new HttpException(400, 'Bad online parameter, you should use true or false');
         }
-        $this->getDoctrine()->getEntityManager()->flush();
+        $this->getDoctrine()->getManager()->flush();
         return new Response('OK');
     }
     
@@ -242,6 +246,19 @@ class PageController extends Controller
      */
     public function apiVideoCheckerAction(Request $request)
     {
+        return $this->apiIframeCheckerAction($request, 'gnkw_video_manager');
+    }
+
+    /**
+     * @Route("/api/chat/checker", name="ldfcorp_api_chat_checker", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function apiChatCheckerAction(Request $request)
+    {
+        return $this->apiIframeCheckerAction($request, 'gnkw_chat_manager');
+    }
+
+    private function apiIframeCheckerAction(Request $request, $checkerName) {
         $content = $request->getContent();
         if(empty($content))
         {
@@ -252,10 +269,10 @@ class PageController extends Controller
         {
             throw new HttpException(400, '"url" parameter is missing');
         }
-        
+
         $url = $params['url'];
-            
-        $checker = $this->get('gnkw_video_manager')->getChecker($url);
+
+        $checker = $this->get($checkerName)->getChecker($url);
         $iframe = array(
             "valid" => false,
             "changing" => false,

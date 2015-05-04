@@ -28,7 +28,7 @@ class PopulateCommand extends ContainerAwareCommand
         
         if($populate)
         {
-            $this->populate($doctrine->getEntityManager());
+            $this->populate($doctrine->getManager());
         }
         else
         {

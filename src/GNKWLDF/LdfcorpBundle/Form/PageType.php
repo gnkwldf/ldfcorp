@@ -21,7 +21,13 @@ class PageType extends AbstractType
             ->add('videoLink', null, array(
                 'label' => 'ldfcorp.page.form.video.link',
                 'attr' => array(
-                    'class' => 'ldfcorp-form-link-iframe'
+                    'class' => 'ldfcorp-form-link-video-iframe'
+                )
+            ))
+            ->add('chatLink', null, array(
+                'label' => 'ldfcorp.page.form.chat.link',
+                'attr' => array(
+                    'class' => 'ldfcorp-form-link-chat-iframe'
                 )
             ))
             ->add('description', null, array(

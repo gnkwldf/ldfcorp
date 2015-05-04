@@ -1,14 +1,15 @@
 <?php
-namespace Gnuk\Extra\Video\Validator;
+
+namespace Gnuk\Extra\Chat\Validator;
+
 
 use Gnuk\Iframe\Validator\BaseChecker;
 
-class TwitchChecker extends BaseChecker
-{
+class TwitchChecker extends BaseChecker {
     const TYPE = "Twitch";
-    
+
     private $code;
-    
+
     public function getType()
     {
         return self::TYPE;
@@ -41,15 +42,15 @@ class TwitchChecker extends BaseChecker
         }
         return false;
     }
-    
+
     public function initParameters()
     {
         // No parameters
     }
-    
+
     public function processIframe()
     {
-        $url = "http://www.twitch.tv/".$this->code."/embed";
+        $url = "http://www.twitch.tv/".$this->code."/chat";
         return $url;
     }
 }

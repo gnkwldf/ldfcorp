@@ -1,6 +1,8 @@
 <?php
-namespace Gnuk\Video\Validator;
-class VideoChecker {
+
+namespace Gnuk\Iframe\Validator;
+
+class IframeChecker {
     private $checkers;
     
     private static $instance = null;

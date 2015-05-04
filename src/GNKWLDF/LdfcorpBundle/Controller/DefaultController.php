@@ -35,6 +35,12 @@ class DefaultController extends Controller
             $pollTimeout = Poll::TIMEOUT_USER;
         }
         $page = $this->getIndexPage();
+        if(null !== $page) {
+            $pageChatLink = $page->getChatLink();
+            if(!empty($pageChatLink)) {
+                $iframeChat = $pageChatLink;
+            }
+        }
         return array(
             'page' => $page,
             'currentUser' => $user,
@@ -185,7 +191,7 @@ class DefaultController extends Controller
             throw new HttpException(405 ,'IPSecurity message : '.$timeoutMessage);
         }
         $pokemon->incrementVote();
-        $this->getDoctrine()->getEntityManager()->flush();
+        $this->getDoctrine()->getManager()->flush();
         return new Response('OK');
     }
     

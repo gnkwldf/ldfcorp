@@ -50,6 +50,7 @@ ldfcorp:
             add: Ajouter une page
         form:
             name: Nom
+            chat.link: Lien du chat à intégrer
             video.link: Lien vidéo à intégrer
             description: Description
             online: Mettre en ligne

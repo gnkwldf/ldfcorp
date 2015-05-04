@@ -87,7 +87,7 @@ class PollController extends Controller
             throw new HttpException(405 ,'IPSecurity message : '.$timeoutMessage);
         }
         $votingEntry->incrementVote();
-        $this->getDoctrine()->getEntityManager()->flush();
+        $this->getDoctrine()->getManager()->flush();
         return new Response('OK');
     }
 

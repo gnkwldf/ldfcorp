@@ -1,8 +1,9 @@
 <?php
-namespace Gnuk\Video\Validator;
 
-use Gnuk\Video\Validator\Tools\Parameter;
-use Gnuk\Video\Validator\Tools\Parameters;
+namespace Gnuk\Iframe\Validator;
+
+use Gnuk\Iframe\Validator\Tools\Parameter;
+use Gnuk\Iframe\Validator\Tools\Parameters;
 
 /**
  * BaseChecker class

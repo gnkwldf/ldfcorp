@@ -114,7 +114,7 @@ class AdminController extends Controller
             default:
                 throw new HttpException(400, 'Bad active parameter, you should use true or false');
         }
-        $this->getDoctrine()->getEntityManager()->flush();
+        $this->getDoctrine()->getManager()->flush();
         return new Response('OK');
     }
 }

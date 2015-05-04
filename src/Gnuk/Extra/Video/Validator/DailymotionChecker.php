@@ -1,7 +1,7 @@
 <?php
 namespace Gnuk\Extra\Video\Validator;
 
-use Gnuk\Video\Validator\BaseChecker;
+use Gnuk\Iframe\Validator\BaseChecker;
 
 class DailymotionChecker extends BaseChecker
 {

@@ -44,12 +44,20 @@ class Page
     /**
      * @var string
      *
+     * @ORM\Column(name="chat_link", type="string", nullable=true)
+     * @GNKWAssert\IframeChat
+     */
+    protected $chatLink;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @var GNKWLDF\LdfcorpBundle\Entity\PageLink
+     * @var \GNKWLDF\LdfcorpBundle\Entity\PageLink
      *
      * @ORM\OneToMany(targetEntity="PageLink", mappedBy="page", cascade={"persist", "remove"})
      * @ORM\OrderBy({"name" = "ASC"})
@@ -85,7 +93,7 @@ class Page
     private $ads;
     
     /**
-     * @var GNKWLDF\LdfcorpBundle\Entity\User
+     * @var \GNKWLDF\LdfcorpBundle\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="pages")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
@@ -164,6 +172,22 @@ class Page
     public function getVideoLink()
     {
         return $this->videoLink;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChatLink()
+    {
+        return $this->chatLink;
+    }
+
+    /**
+     * @param string $chatLink
+     */
+    public function setChatLink($chatLink)
+    {
+        $this->chatLink = $chatLink;
     }
     
     /**
