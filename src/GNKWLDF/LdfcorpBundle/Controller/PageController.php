@@ -134,7 +134,10 @@ class PageController extends Controller
             )
         );
     }
-    
+
+    /**
+     * @param \GNKWLDF\LdfcorpBundle\Entity\Page $page
+     */
     private function changePage($page)
     {
         $originalLinks = new ArrayCollection();
@@ -149,6 +152,12 @@ class PageController extends Controller
             $checker = $this->get('gnkw_video_manager')->getChecker($page->getVideoLink());
             if(null !== $checker) {
                 $page->setVideoLink($checker->getIframe());
+            }
+        }
+        if(null !== $page->getChatLink()) {
+            $checker = $this->get('gnkw_chat_manager')->getChecker($page->getChatLink());
+            if(null !== $checker) {
+                $page->setChatLink($checker->getIframe());
             }
         }
         
