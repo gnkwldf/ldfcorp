@@ -9,8 +9,9 @@ class ChatManager {
 
     public function __construct()
     {
-        $this->chatChecker = IframeChecker::getInstance();
+        $this->chatChecker = new IframeChecker();
         $this->chatChecker->addChecker("Gnuk\\Extra\\Chat\\Validator\\TwitchChecker");
+        $this->chatChecker->addChecker("Gnuk\\Extra\\Chat\\Validator\\HitboxChecker");
     }
 
     /**

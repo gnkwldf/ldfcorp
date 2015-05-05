@@ -5,9 +5,7 @@ namespace Gnuk\Iframe\Validator;
 class IframeChecker {
     private $checkers;
     
-    private static $instance = null;
-    
-    private function __construct()
+    public function __construct()
     {
         $this->checkers = array();
     }
@@ -15,15 +13,6 @@ class IframeChecker {
     public function setCheckers($checkers)
     {
         $this->checkers = $checkers;
-    }
-    
-    public static function getInstance()
-    {
-        if(null === self::$instance)
-        {
-            self::$instance = new self();
-        }
-        return self::$instance;
     }
     
     public function addChecker($checker)

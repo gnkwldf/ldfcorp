@@ -1,33 +1,26 @@
 <?php
 namespace Gnuk\Extra\Video\Validator;
 
+use Gnuk\Extra\HitboxUtil;
 use Gnuk\Iframe\Validator\BaseChecker;
 
 class HitboxChecker extends BaseChecker
 {
-    const TYPE = "Hitbox";
-    
     private $code;
     
     public function getType()
     {
-        return self::TYPE;
+        return HitboxUtil::TYPE;
     }
 
     public function isValidSyntax()
     {
-        $matches = array();
-        if(preg_match('#^((https?\:)?\/\/)?(www\.)?hitbox\.tv\/embed\/([a-zA-Z0-9]+)#', $this->getUrl(), $matches) AND !empty($matches[4]))
-        {
-            $this->code = $matches[4];
-            return true;
+        $code = HitboxUtil::getCodeFromUrl($this->getUrl());
+        if(null === $code) {
+            return false;
         }
-        if(preg_match('#^((https?\:)?\/\/)?(www\.)?hitbox\.tv\/([a-zA-Z0-9]+)#', $this->getUrl(), $matches) AND !empty($matches[4]))
-        {
-            $this->code = $matches[4];
-            return true;
-        }
-        return false;
+        $this->code = $code;
+        return true;
     }
     
     public function initParameters()

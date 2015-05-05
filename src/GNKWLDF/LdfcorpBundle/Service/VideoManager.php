@@ -9,7 +9,7 @@ class VideoManager {
     
     public function __construct()
     {
-        $this->videoChecker = IframeChecker::getInstance();
+        $this->videoChecker = new IframeChecker();
         $this->videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\YoutubeChecker");
         $this->videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\DailymotionChecker");
         $this->videoChecker->addChecker("Gnuk\\Extra\\Video\\Validator\\TwitchChecker");
