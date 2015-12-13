@@ -1,5 +1,4 @@
 parameters:
-    database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     symfony
@@ -11,7 +10,6 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
 
-    locale:            fr
     secret:            ThisTokenIsNotSoSecretChangeIt
     node_server: http://localhost:10000
     node_client: http://localhost:8000

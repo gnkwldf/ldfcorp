@@ -16,7 +16,7 @@ First of all you need this some programs
   project)
 * [A browser](http://www.chromium.org/) (chrome/firefox/opera/safari …)
 
-Now you can install this project based on [Symfony 2.3.x](http://symfony.com/) …
+Now you can install this project based on [Symfony 2.8.x](http://symfony.com/) …
 
 ### Initialize project
 

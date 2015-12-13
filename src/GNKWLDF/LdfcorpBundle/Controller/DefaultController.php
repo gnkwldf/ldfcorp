@@ -2,19 +2,18 @@
 
 namespace GNKWLDF\LdfcorpBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Gnkw\Symfony\HttpFoundation\FormattedResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use GNKWLDF\LdfcorpBundle\Entity\Page;
-use GNKWLDF\LdfcorpBundle\Entity\PageLink;
 use GNKWLDF\LdfcorpBundle\Entity\Pokemon;
 use GNKWLDF\LdfcorpBundle\Entity\Poll;
 use Gnuk\IPSecurity;
+use Gnuk\Symfony\HttpFoundation\FormattedResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class DefaultController extends Controller
 {

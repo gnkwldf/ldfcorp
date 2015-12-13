@@ -2,19 +2,19 @@
 
 namespace GNKWLDF\LdfcorpBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use GNKWLDF\LdfcorpBundle\Form\PageType;
-use GNKWLDF\LdfcorpBundle\Entity\Page;
-use GNKWLDF\LdfcorpBundle\Entity\Poll;
-use GNKWLDF\LdfcorpBundle\Entity\Pokemon;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gnkw\Symfony\HttpFoundation\FormattedResponse;
+use GNKWLDF\LdfcorpBundle\Entity\Page;
+use GNKWLDF\LdfcorpBundle\Entity\Pokemon;
+use GNKWLDF\LdfcorpBundle\Entity\Poll;
+use GNKWLDF\LdfcorpBundle\Form\PageType;
+use Gnuk\Symfony\HttpFoundation\FormattedResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PageController extends Controller
 {
